@@ -1,4 +1,5 @@
 import os 
+import requests
 from flask import (Flask, flash,
                     render_template, redirect,
                     request, session, url_for)
@@ -10,6 +11,10 @@ if os.path.exists("env.py"):
 
 
 app = Flask(__name__)
+title = "matrix"
+url_end = "&s=" + title
+response = requests.get("https://www.omdbapi.com/?i=tt3896198&apikey=8acb1c61" + url_end)
+print(response.json())
 
 app.config["MONGO_DBNAME"] = os.environ.get("MONGO_DBNAME")
 app.config["MONGO_URI"] = os.environ.get("MONGO_URI")
