@@ -3,20 +3,14 @@
         <div class="container">
             <div class="row">
                 {% for item in movies_sorted %}
-                <div class="col s4">
-                <div class="card">
-                    <div class="card-image">
-                        <img src="{{ item.Poster }}" alt="Poster of {{ item.Title }}">
+                    <div class="card col-4" style="width: 18rem;">
+                        <img src="{{ item.Poster }}" class="card-img-top" alt="Poster of {{ item.Title }}">
+                        <div class="card-body">
+                        <h5 class="card-title">{{ item.Title }}</h5>
+                        <p class="card-text"><p>{{ item.Year }}</p></p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                        </div>
                     </div>
-                    <div class="card-content">
-                        <p class="text-container"><strong>{{ item.Title }}</strong></p>
-                        <p>{{ item.Year }}</p>
-                    </div>
-                    <div class="card-action">
-                        <a href="#">This is a link</a>
-                    </div>
-                </div>
-                </div>
                 {% endfor %}
             </div>
         </div>

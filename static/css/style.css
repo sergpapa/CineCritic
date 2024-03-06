@@ -1,16 +1,28 @@
-.card {
-    overflow: hidden;
+nav {
+    background-color: aquamarine;
 }
 
-.card .card-image img {
-    width: 100%; /* Make sure the image fills the container */
-    height: 320px;
+.card {
+    overflow: hidden;
+    height: auto;
+    width: 85%;
+}
+
+.card:hover {
+    box-shadow: 0px 0px 10px 0 rgba(0,0,0,.5)
 }
 
 .card .card-image .card-title {
     font-weight: 700;
 }
 
-.text-container {
-    height: 50px;
+.card .card-content p {
+    display: block;
+}
+
+
+.red {
+    background-color: gray;
+    width: 200px;
+    height: 400px;
 }
