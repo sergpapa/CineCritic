@@ -1,5 +1,25 @@
 {% extends "base.html" %}
 {% block content %}
+        <div class="container">
+            <div class="row">
+                {% for item in movies_sorted %}
+                <div class="col s4">
+                <div class="card">
+                    <div class="card-image">
+                        <img src="{{ item.Poster }}" alt="Poster of {{ item.Title }}">
+                    </div>
+                    <div class="card-content">
+                        <p>{{ item.Title }}</p>
+                        <p>{{ item.Year }}</p>
+                    </div>
+                    <div class="card-action">
+                        <a href="#">This is a link</a>
+                    </div>
+                </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
     {% for movie in movies %}
 
     <p>{{ movie.title }}</p>

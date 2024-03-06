@@ -1,0 +1,12 @@
+.card {
+    overflow: hidden;
+}
+
+.card .card-image img {
+    width: 100%; /* Make sure the image fills the container */
+    height: 330px;
+}
+
+h3 {
+
+}
