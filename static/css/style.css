@@ -4,9 +4,13 @@
 
 .card .card-image img {
     width: 100%; /* Make sure the image fills the container */
-    height: 330px;
+    height: 320px;
 }
 
-h3 {
+.card .card-image .card-title {
+    font-weight: 700;
+}
 
+.text-container {
+    height: 50px;
 }
