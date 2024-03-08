@@ -1,19 +1,39 @@
 {% extends "base.html" %}
 {% block content %}
-        <div class="container">
+    <div class="col ml-2 footer-margin">
+        <div class="container-fluid .flex-wrap">
             <div class="row">
-                {% for item in movies_sorted %}
-                    <div class="card col-4" style="width: 18rem;">
-                        <img src="{{ item.Poster }}" class="card-img-top" alt="Poster of {{ item.Title }}">
-                        <div class="card-body">
-                        <h5 class="card-title">{{ item.Title }}</h5>
-                        <p class="card-text"><p>{{ item.Year }}</p></p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                <div class="col">
+                    <form  method="POST" action="{{ url_for('search') }}">
+                        <div class="form-group">
+                          <label for="searchMovies">Search Movies by Title</label>
+                          <div class="form-wrapper">
+                            <button class="btn btn-large btn-brown mx-auto" type="submit" class="btn btn-primary"><i class="fa-solid fa-magnifying-glass"></i></button>
+                            <input type="text" class="form-control" id="searchMovies" name="searchMovies" aria-describedby="searchMovies" placeholder="Enter movie title">
+                          </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="row">
+            {% for item in movies_sorted %}
+                <div class="col-4 red">
+                    <div class="container p-2 justify-content-center">
+                        <div class="row">
+                            <div class="card text-center">
+                                <img src="{{ item.Poster }}" class="card-img-top" alt="Poster of {{ item.Title }}">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ item.Title }}</h5>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                {% endfor %}
+                </div> 
+            {% endfor %}
             </div>
         </div>
+    </div>
+
     {% for movie in movies %}
 
     <p>{{ movie.title }}</p>

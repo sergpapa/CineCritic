@@ -31,16 +31,21 @@ def sort_movies(movie_list):
 # Template rendering
 
 @app.route("/")
-@app.route("/get_movies")
+@app.route("/get_movies", methods=["GET", "POST"])
 def get_movies():
-    title = "american Pie"
-    url_end = "&s=" + title
+    movies = list(mongo.db.movies.find())
+
+    return render_template("get_movies.html", movies=movies)
+
+@app.route("/search", methods=["GET", "POST"])
+def search():
+    title = request.form.get("searchMovies")
+    url_end = "&s=" + str(title).replace(" ", "_")
+    print(url_end)
     search = requests.get("https://www.omdbapi.com/?i=tt3896198&apikey=8acb1c61" + url_end).json()
     response = (search["Search"])
     movies_sorted = sort_movies(response)
-    movies = list(mongo.db.movies.find())
-
-    return render_template("get_movies.html", movies=movies, movies_sorted=movies_sorted)    
+    return render_template("get_movies.html", movies_sorted=movies_sorted)
 
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
