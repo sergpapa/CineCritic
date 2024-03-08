@@ -21,7 +21,12 @@
                     <div class="container p-2 justify-content-center">
                         <div class="row">
                             <div class="card text-center">
-                                <img src="{{ item.Poster }}" class="card-img-top" alt="Poster of {{ item.Title }}">
+                                {% if item.Poster != "N/A" %}
+                                    <img src="{{ item.Poster }}" class="card-img-top" alt="Poster of {{ item.Title }}">
+                                {% else %}
+                                    <!-- Fallback image in case poster doesn't exist -->
+                                    <img src="https://placehold.co/300x400" class="card-img-top" alt="Fallback Poster">
+                                {% endif %}
                                 <div class="card-body">
                                     <h5 class="card-title">{{ item.Title }}</h5>
                                 </div>
