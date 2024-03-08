@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
-    <div class="col ml-2 footer-margin">
+    <div class="col ml-2">
         <div class="container-fluid .flex-wrap">
             <div class="row">
                 <div class="col">
@@ -17,9 +17,9 @@
             </div>
             <div class="row">
             {% for item in movies_sorted %}
-                <div class="col-4 red">
+                <div class="col-4">
                     <div class="container p-2 justify-content-center">
-                        <div class="row">
+                        <div class="row" onclick="window.location='{{ url_for('add_movie', imdbID=item.imdbID) }}'">
                             <div class="card text-center">
                                 {% if item.Poster != "N/A" %}
                                     <img src="{{ item.Poster }}" class="card-img-top" alt="Poster of {{ item.Title }}">
@@ -38,12 +38,4 @@
             </div>
         </div>
     </div>
-
-    {% for movie in movies %}
-
-    <p>{{ movie.title }}</p>
-    <p>{{ movie.year }}</p>
-
-    {% endfor %}
-
 {% endblock %}

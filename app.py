@@ -31,21 +31,38 @@ def sort_movies(movie_list):
 # Template rendering
 
 @app.route("/")
-@app.route("/get_movies", methods=["GET", "POST"])
+@app.route("/get_movies")
 def get_movies():
     movies = list(mongo.db.movies.find())
-
     return render_template("get_movies.html", movies=movies)
 
 @app.route("/search", methods=["GET", "POST"])
 def search():
     title = request.form.get("searchMovies")
     url_end = "&s=" + str(title).replace(" ", "_")
-    print(url_end)
     search = requests.get("https://www.omdbapi.com/?i=tt3896198&apikey=8acb1c61" + url_end).json()
     response = (search["Search"])
     movies_sorted = sort_movies(response)
     return render_template("get_movies.html", movies_sorted=movies_sorted)
+
+@app.route("/add_movie/<imdbID>")
+def add_movie(imdbID):
+    existing_movie = mongo.db.movies.find_one({"imdbID": imdbID})
+    if existing_movie:
+        flash("Movie already in database")
+    else:
+        movie = requests.get("https://www.omdbapi.com/?i=" + imdbID + "&apikey=8acb1c61").json()
+        print("movie= ", movie)
+        print(type(movie))
+        movie_to_add = {
+            "title": movie["Title"],
+            "year": movie["Year"],
+            "poster": movie["Poster"],
+            "imdbID": movie["imdbID"]
+        }
+        mongo.db.movies.insert_one(movie_to_add)
+        flash("Movie added successfully")
+    return render_template("get_movies.html")
 
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
