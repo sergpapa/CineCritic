@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="col ml-2">
+        <div class="container-fluid .flex-wrap">
+            <div class="row">
+                <div class="col">
+                    <h3 class="text-center">Register</h3>
+                </div>
+            </div>
+            <div class="row">
+                <form class="col" method="POST" action="{{ url_for('register') }}">
+                    <div class="container-brown p-4">
+                        <div class="row">
+                            <!--  username -->
+                            <div class="input-group mb-3 col-6 offset-4">
+                                <div class="row">
+                                    <div class="col-4">
+                                        <label for="username">Username</label>
+                                    </div>
+                                    <div class="col-8">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1"><i class="fas fa-user-cog"></i></span>
+                                            <input class="input" id="username" name="username" type="text" class="validate" 
+                                                pattern="^[a-zA-Z0-9]{5,15}$" minlength="5" maxlength="15" required>
+                                        </div>
+                                    </div>
+                                </div>                            
+                            </div>
+                        </div>
+                        <!--  password -->
+                        <div class="row">
+                            <div class="input-group mb-3 col-6 offset-4">
+                                <div class="row">
+                                    <div class="col-4">
+                                        <label for="password">Password</label>
+                                    </div>
+                                    <div class="col-8">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1"><i class="fas fa-user-lock"></i></span>
+                                            <input class="input" id="password" name="password" type="password" class="validate" 
+                                            pattern="^[a-zA-Z0-9]{5,15}$" minlength="5" maxlength="15" required>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--  submit -->
+                        <div class="row justify-content-center">
+                            <button type="submit" class="col-2 offset-5 btn btn-large btn-brown">
+                                Register <i class="fas fa-sign-in-alt"></i></button>
+                        </div>
+
+                        <div class="row">
+                            <div class="col">
+                                <p class="text-center">
+                                    Already Registered?
+                                    <a href="{{ url_for('login') }}" class="light-blue-text text-darken-4">Log In</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
