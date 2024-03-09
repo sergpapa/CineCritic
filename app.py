@@ -135,7 +135,12 @@ def add_movie(imdbID):
     return redirect(url_for("search"))
 
 
-@app.route("/add_review/<imdbID>")
+@app.route("/movie/<imdbID>")
+def movie(imdbID):
+    movie = mongo.db.movies.find_one({"imdbID": imdbID})
+    return render_template("movie.html", movie=movie)
+
+@app.route("/add_review/<imdbID>", methods=["GET", "POST"])
 def add_review(imdbID):
     movie = mongo.db.movies.find_one({"imdbID": imdbID})
     return render_template("add_review.html", movie=movie)

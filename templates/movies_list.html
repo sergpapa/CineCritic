@@ -12,7 +12,7 @@
                     <div class="col">
                         <div class="container p-2 text-center">
                             <div class="row justify-content-center">
-                                <div class="card text-center" onclick="window.location='{{ url_for('add_review', imdbID=movie.imdbID) }}'">
+                                <div class="card text-center" onclick="window.location='{{ url_for('movie', imdbID=movie.imdbID) }}'">
                                     {% if movie.poster != "N/A" %}
                                         <img src="{{ movie.poster }}" class="card-img-top" alt="Poster of {{ movie.Title }}">
                                     {% else %}
