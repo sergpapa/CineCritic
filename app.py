@@ -112,23 +112,27 @@ def logout():
 @app.route("/add_movie/<imdbID>")
 def add_movie(imdbID):
     existing_movie = mongo.db.movies.find_one({"imdbID": imdbID})
-    if existing_movie:
-        flash("Movie already in database")
+    if 'username' in session:
+        if existing_movie:
+            flash("Movie already in database")
+        else:
+            movie = requests.get("https://www.omdbapi.com/?i=" + imdbID + "&apikey=8acb1c61").json()
+            print("movie= ", movie)
+            print(type(movie))
+            movie_to_add = {
+                "title": movie["Title"],
+                "year": movie["Year"],
+                "poster": movie["Poster"],
+                "imdbID": movie["imdbID"],
+                "added_by": session["user"]
+            }
+            mongo.db.movies.insert_one(movie_to_add)
+            flash("Movie added successfully")
+            return render_template("movies_list.html", movies=movies)
     else:
-        movie = requests.get("https://www.omdbapi.com/?i=" + imdbID + "&apikey=8acb1c61").json()
-        print("movie= ", movie)
-        print(type(movie))
-        movie_to_add = {
-            "title": movie["Title"],
-            "year": movie["Year"],
-            "poster": movie["Poster"],
-            "imdbID": movie["imdbID"],
-            "added_by": session["user"]
-        }
-        mongo.db.movies.insert_one(movie_to_add)
-        flash("Movie added successfully")
+        flash("You must be logged in to add a movie")
     movies = list(mongo.db.movies.find())
-    return render_template("movies_list.html", movies=movies)
+    return redirect(url_for("search"))
 
 
 @app.route("/add_review/<imdbID>")
