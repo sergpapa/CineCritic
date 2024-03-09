@@ -143,6 +143,14 @@ def movie(imdbID):
 @app.route("/add_review/<imdbID>", methods=["GET", "POST"])
 def add_review(imdbID):
     movie = mongo.db.movies.find_one({"imdbID": imdbID})
+    if request.method == "POST":
+        review = {
+            "review": request.form.get("add_review"),
+            "movie": movie.title,
+            "added_by": session["user"]
+        }
+        mongo.db.reviews.insert_one(review)
+        flash("Review added successfully!")
     return render_template("add_review.html", movie=movie)
 
 if __name__ == "__main__":

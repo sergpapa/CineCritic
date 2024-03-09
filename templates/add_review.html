@@ -4,7 +4,7 @@
         <div class="container-fluid .flex-wrap">
             <div class="row m-4">
                 <div class="col text-center">
-                    <h3>Add Review for {{ movie.title }}</h3>
+                    <h3>Add Review</h3>
                 </div>
             </div>
             <div class="row mb-4">
@@ -16,34 +16,20 @@
                                 </div>
                             </div>
                             <div class="row p-2">
-                                <div class="col-6 my-4">
-                                    {% if movie.poster != "N/A" %}
-                                        <img src="{{ movie.poster }}" class="card-img-top poster" alt="Poster of {{ movie.Title }}">
-                                    {% else %}
-                                        <!-- Fallback image in case poster doesn't exist -->
-                                        <img src="https://placehold.co/300x400" class="card-img-top" alt="Fallback Poster">
-                                    {% endif %}
+                                <div class="col">
+                                    <form method="POST" action="{{ url_for('add_review', imdbID=movie.imdbID) }}">
+                                        <div class="form-group">
+                                        <label for="add_review">Write your review here</label>
+                                        <textarea class="form-control container-brown" id="add_review" name="add_review"
+                                            minlength="50" maxlength="1000" rows="3" placeholder="Write your review here" required></textarea>
+                                        </div>
+                                    </form>
                                 </div>
-                                <div class="col-6 text-bez">
-                                    <div class="row">
-                                        <div class="col">
-                                            <h5 class="my-4">Details</h5>
-                                            <div class="text-left">
-                                                <p>Year of release: {{ movie.year }}</p>
-                                                <p>Added By: {{ movie.added_by }}</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col">
-                                            <h5 class="my-4">Reviews</h5>
-                                            <div class="container-brown">
-                                                {% for review in movie.reviews %}
-                                                {% endfor %}
-                                            </div>
-                                            <a class="btn btn-large btn-brown" href="{{ url_for('add_review', imdbID=movie.imdbID) }}">Add a review</a>
-                                        </div>
-                                    </div>
+                            </div>
+                            <div class="row">
+                                <div class="col text-center">
+                                    <a class="btn btn-large btn-dark-brown" href="{{ url_for('movie', imdbID=movie.imdbID) }}">Cancel</a>  
+                                    <a class="btn btn-large btn-brown" href="{{ url_for('add_review', imdbID=movie.imdbID) }}">Add review</a> 
                                 </div>
                             </div>
                         </div>
