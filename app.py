@@ -46,10 +46,10 @@ def search():
     movies_sorted = sort_movies(response)
     return render_template("search.html", movies_sorted=movies_sorted, movies=movies, title=title)
 
+## Prifile functionality from Taskmanager Project
 @app.route("/register", methods=["GET", "POST"])
 def register():
     if request.method == "POST":
-        # check if username already exists in db
         existing_user = mongo.db.users.find_one(
             {"username": request.form.get("username").lower()})
         
@@ -63,14 +63,12 @@ def register():
         }
         mongo.db.users.insert_one(register)
 
-        # put the new user into 'session' cookie
         session["user"] = request.form.get("username").lower()
         flash("Registration successfull")
         return redirect(url_for("profile", username=session["user"]))
     return render_template("register.html")
 
 
-## Prifile functionality from Taskmanager Project
 @app.route("/login", methods=["GET", "POST"])
 def login():
     if request.method == "POST":
@@ -93,6 +91,24 @@ def login():
             return redirect(url_for("login"))  
     return render_template("login.html")
 
+
+@app.route("/profile/<username>", methods=["GET", "POST"])
+def profile(username):
+    username = mongo.db.users.find_one(
+        {"username": session["user"]})["username"]
+    if session["user"]:
+        return render_template("profile.html", username=username)
+
+    return render_template("login.html")
+
+@app.route("/logout")
+def logout():
+    flash("You have been logged out")
+    session.pop("user")
+    return redirect(url_for("login"))
+
+## end of profile funcitonality
+
 @app.route("/add_movie/<imdbID>")
 def add_movie(imdbID):
     existing_movie = mongo.db.movies.find_one({"imdbID": imdbID})
@@ -106,23 +122,14 @@ def add_movie(imdbID):
             "title": movie["Title"],
             "year": movie["Year"],
             "poster": movie["Poster"],
-            "imdbID": movie["imdbID"]
+            "imdbID": movie["imdbID"],
+            "added_by": session["user"]
         }
         mongo.db.movies.insert_one(movie_to_add)
         flash("Movie added successfully")
     movies = list(mongo.db.movies.find())
     return render_template("movies_list.html", movies=movies)
 
-@app.route("/profile/<username>", methods=["GET", "POST"])
-def profile(username):
-    username = mongo.db.users.find_one(
-        {"username": session["user"]})["username"]
-    if session["user"]:
-        return render_template("profile.html", username=username)
-
-    return render_template("login.html")
-
-## end of profile funcitonality
 
 @app.route("/add_review/<imdbID>")
 def add_review(imdbID):
