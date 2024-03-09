@@ -15,11 +15,12 @@
                     </form>
                 </div>
             </div>
-            <div class="row">
+            <div class="row ml-2">
             {% for item in movies_sorted %}
+                {% if title %}
                 <div class="col-4">
-                    <div class="container p-2 justify-content-center">
-                        <div class="row" onclick="window.location='{{ url_for('add_movie', imdbID=item.imdbID) }}'">
+                    <div class="container p-2 text-center">
+                        <div class="row justify-content-center" onclick="window.location='{{ url_for('add_movie', imdbID=item.imdbID) }}'">
                             <div class="card text-center">
                                 {% if item.Poster != "N/A" %}
                                     <img src="{{ item.Poster }}" class="card-img-top" alt="Poster of {{ item.Title }}">
@@ -33,9 +34,15 @@
                             </div>
                         </div>
                     </div>
-                </div> 
+                </div>
+                {% endif %}
             {% endfor %}
             </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col text-center">
+            <a class="btn btn-large btn-brown" href="{{ url_for('movies_list') }}">Movies Added <i class="fa-solid fa-film"></i></a>
         </div>
     </div>
 {% endblock %}

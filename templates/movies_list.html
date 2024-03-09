@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="col ml-2">
+        <div class="container-fluid .flex-wrap">
+            <div class="row m-4">
+                <div class="col text-center">
+                    <h3>Movie List</h3>
+                </div>
+            </div>
+            <div class="row ml-2 mb-4">
+                {% for movie in movies %}
+                    <div class="col">
+                        <div class="container p-2 text-center">
+                            <div class="row justify-content-center">
+                                <div class="card text-center" onclick="window.location='{{ url_for('add_review', imdbID=movie.imdbID) }}'">
+                                    {% if movie.poster != "N/A" %}
+                                        <img src="{{ movie.poster }}" class="card-img-top" alt="Poster of {{ movie.Title }}">
+                                    {% else %}
+                                        <!-- Fallback image in case poster doesn't exist -->
+                                        <img src="https://placehold.co/300x400" class="card-img-top" alt="Fallback Poster">
+                                    {% endif %}
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{ movie.title }}</h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="row">
+                <div class="col text-center footer-margin">
+                    <a href="{{ url_for('search') }}" class="btn btn-large btn-brown">Back to Search</a>
+                </div>
+            </div>
+        
+        </div>
+    </div>
+{% endblock %}

@@ -12,75 +12,52 @@
         <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" type="text/css">
 
 
-        <title>Document</title>
+        <title>Cine Critic</title>
     </head>
     <body>
     <div class="container-fluid">
         <div class="row">
-        <div class="nav-bar col-2 position-fixed nav-side d-flex flex-column">
-            <h1><a href="{{ url_for('get_movies') }}">Logo</a></h1>
-            <p>Test Subhead</p>
-        </div>
-        <div class="col-10 offset-2">
-            <div class="container-fluid p-0">
-            <header class="row">
-                <div class="col text-center my-auto">
-                    <h1>Cine Critic</h1>
-                    <p class="text-bez font-italic">The house of tastefull cinema critique!</p>
-                </div>
-            </header>
-            <div class="row">
-                <section class="col text-center">
-                    <!-- flash messages -->
-                    {% with messages = get_flashed_messages() %}
-                        {% if messages %}
-                            {% for message in messages %}
-                                <div class="row">
-                                    <h4 class="col">{{ message }}</h4>
-                                </div>
-                            {% endfor %}
-                        {% endif %}
-                    {% endwith %}
-                </section>
+            <div class="nav-bar col-2 position-fixed nav-side d-flex flex-column">
+                <h1 class="mt-4"><a class="m-4" href="{{ url_for('search') }}">Logo</a></h1>
+                <ul class="my-4">
+                    <li><a href="#">Log In</a></li>
+                    <li><a href="#">Register</a></li>
+                </ul>
             </div>
-            <div class="row">
-                {% block content %}
-                {% endblock %}
-            </div>
-            <div class="row">
-                <div class="col text-center">
-                    <h5>Movie List</h5>
-                </div>
-            </div>
-            <div class="row ml-4">
-                {% for movie in movies %}
-                    <div class="col footer-margin">
-                        <div class="container p-2 text-center">
-                            <div class="row justify-content-center">
-                                <div class="card text-center">
-                                    {% if movie.poster != "N/A" %}
-                                        <img src="{{ movie.poster }}" class="card-img-top" alt="Poster of {{ movie.Title }}">
-                                    {% else %}
-                                        <!-- Fallback image in case poster doesn't exist -->
-                                        <img src="https://placehold.co/300x400" class="card-img-top" alt="Fallback Poster">
-                                    {% endif %}
-                                    <div class="card-body">
-                                        <h5 class="card-title">{{ movie.title }}</h5>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+            <div class="col-10 offset-2">
+                <div class="container-fluid p-0">
+                <header class="row">
+                    <div class="col text-center my-auto">
+                        <h1>Cine Critic</h1>
+                        <p class="text-bez font-italic">The house of tastefull cinema critique!</p>
                     </div>
-                {% endfor %}
-            </div>
-            <footer class="row">
-                <div class="col text-center font-italic my-auto">
-                    <p class="m-0">&copy; Copyright</p>
-                    <p class="m-0">Sergios Papastergiou</p>
+                </header>
+                <div class="row">
+                    <section class="col text-center">
+                        <!-- flash messages -->
+                        {% with messages = get_flashed_messages() %}
+                            {% if messages %}
+                                {% for message in messages %}
+                                    <div class="row">
+                                        <h4 class="col">{{ message }}</h4>
+                                    </div>
+                                {% endfor %}
+                            {% endif %}
+                        {% endwith %}
+                    </section>
                 </div>
-            </footer> 
+                <div class="row">
+                    {% block content %}
+                    {% endblock %}
+                </div>
+                <footer class="row">
+                    <div class="col text-center font-italic my-auto">
+                        <p class="m-0">&copy; Copyright</p>
+                        <p class="m-0">Sergios Papastergiou</p>
+                    </div>
+                </footer> 
+                </div>
             </div>
-        </div>
         </div>
     </div>
 
