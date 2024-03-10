@@ -138,7 +138,7 @@ def add_movie(imdbID):
 @app.route("/movie/<imdbID>")
 def movie(imdbID):
     movie = mongo.db.movies.find_one({"imdbID": imdbID})
-    reviews = mongo.db.reviews.find()
+    reviews = list(mongo.db.reviews.find())
     return render_template("movie.html", movie=movie, reviews=reviews)
 
 @app.route("/add_review/<imdbID>", methods=["GET", "POST"])
@@ -151,12 +151,31 @@ def add_review(imdbID):
             "imdbID": movie["imdbID"],
             "added_by": session["user"]
         }
-        print(review)
         mongo.db.reviews.insert_one(review)
         flash("Review added successfully!")
         return redirect(url_for("movie", imdbID=movie["imdbID"]))
         
     return render_template("add_review.html", movie=movie)
+
+@app.route("/edit_review/<review_id>/<imdbID>", methods=["GET", "POST"])
+def edit_review(review_id, imdbID):
+    movie = mongo.db.movies.find_one({"imdbID": imdbID})
+    review_to_edit = mongo.db.reviews.find_one({"_id": ObjectId(review_id)})
+    if request.method == "POST":
+        review = {
+            "review": request.form.get("edit_review"),
+        }
+        mongo.db.reviews.update_one({"_id": ObjectId(review_id)}, {"$set": review})
+        flash("Review edited successfully!")
+        return redirect(url_for("movie", imdbID=movie["imdbID"]))
+        
+    return render_template("edit_review.html", movie=movie, review_to_edit=review_to_edit)
+
+@app.route("/delete_review//<review_id>/<imdbID>")
+def delete_review(imdbID, review_id):
+    mongo.db.reviews.delete_one({"_id": ObjectId(review_id)})
+    flash("Review successfully deleted")
+    return redirect(url_for("movie", imdbID=imdbID))
 
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),

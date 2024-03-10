@@ -4,7 +4,7 @@
         <div class="container-fluid .flex-wrap">
             <div class="row m-4">
                 <div class="col text-center">
-                    <h3>Add Review</h3>
+                    <h3>Edit Review</h3>
                 </div>
             </div>
             <div class="row mb-4">
@@ -17,15 +17,15 @@
                             </div>
                             <div class="row p-2">
                                 <div class="col">
-                                    <form method="POST" action="{{ url_for('add_review', imdbID=movie.imdbID) }}">
+                                    <form method="POST" action="{{ url_for('edit_review', review_id=review_to_edit._id, imdbID=movie.imdbID) }}">
                                         <div class="form-group">
-                                            <label for="add_review">Write your review here</label>
-                                            <textarea class="form-control container-brown" id="add_review" name="add_review"
-                                                minlength="40" maxlength="1000" rows="3" placeholder="Write your review here" required></textarea>
+                                            <label for="edit_review">Edit your review here</label>
+                                            <textarea class="form-control container-brown" id="edit_review" name="edit_review"
+                                                minlength="40" maxlength="1000" rows="3" required>{{ review_to_edit.review }}</textarea>
                                         </div>
                                         <div class="text-center">
                                             <a class="btn btn-large btn-dark-brown" href="{{ url_for('movie', imdbID=movie.imdbID) }}">Cancel</a>  
-                                            <button type="submit" class="btn btn-large btn-brown">Add review</a> 
+                                            <button type="submit" class="btn btn-large btn-brown">Edit review</button> 
                                         </div>
                                     </form>
                                 </div>

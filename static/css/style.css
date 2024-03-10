@@ -41,6 +41,10 @@
     color: #56482f;
 }
 
+.review .btn-brown {
+    margin: 0;
+}
+
 .btn-dark-brown:hover {
     box-shadow: 0px 0px 8px rgba(0, 0, 0, .4);
     background-color: #56482f;
