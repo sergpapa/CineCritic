@@ -19,19 +19,17 @@
                                 <div class="col">
                                     <form method="POST" action="{{ url_for('add_review', imdbID=movie.imdbID) }}">
                                         <div class="form-group">
-                                        <label for="add_review">Write your review here</label>
-                                        <textarea class="form-control container-brown" id="add_review" name="add_review"
-                                            minlength="50" maxlength="1000" rows="3" placeholder="Write your review here" required></textarea>
+                                            <label for="add_review">Write your review here</label>
+                                            <textarea class="form-control container-brown" id="add_review" name="add_review"
+                                                minlength="40" maxlength="1000" rows="3" placeholder="Write your review here" required></textarea>
+                                        </div>
+                                        <div class="text-center">
+                                            <a class="btn btn-large btn-dark-brown" href="{{ url_for('movie', imdbID=movie.imdbID) }}">Cancel</a>  
+                                            <button type="submit" class="btn btn-large btn-brown" href="{{ url_for('add_review', imdbID=movie.imdbID) }}">Add review</a> 
                                         </div>
                                     </form>
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="col text-center">
-                                    <a class="btn btn-large btn-dark-brown" href="{{ url_for('movie', imdbID=movie.imdbID) }}">Cancel</a>  
-                                    <a class="btn btn-large btn-brown" href="{{ url_for('add_review', imdbID=movie.imdbID) }}">Add review</a> 
-                                </div>
-                            </div>
+                            </div>                            
                         </div>
                     </div>
                 </div>

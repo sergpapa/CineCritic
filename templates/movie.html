@@ -24,7 +24,7 @@
                                         <img src="https://placehold.co/300x400" class="card-img-top" alt="Fallback Poster">
                                     {% endif %}
                                 </div>
-                                <div class="col-6 text-bez">
+                                <div class="col-5 ml-4 text-bez">
                                     <div class="row">
                                         <div class="col">
                                             <h5 class="my-4">Details</h5>
@@ -34,11 +34,17 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="row">
+                                    <div class="row ml-2">
                                         <div class="col">
                                             <h5 class="my-4">Reviews</h5>
-                                            <div class="container-brown">
-                                                {% for review in movie.reviews %}
+                                            <div class="container-brown py-2 review-box">
+                                                {% for review in reviews %}
+                                                    {% if review.imdbID == movie.imdbID %}
+                                                        <div class="review my-2 py-2">
+                                                            <p class="mb-0">{{ review.review }}</p>
+                                                            <small><strong>By {{ review.added_by }}</strong></small>
+                                                        </div>
+                                                    {% endif %}
                                                 {% endfor %}
                                             </div>
                                             <a class="btn btn-large btn-brown" href="{{ url_for('add_review', imdbID=movie.imdbID) }}">Add a review</a>

@@ -138,7 +138,8 @@ def add_movie(imdbID):
 @app.route("/movie/<imdbID>")
 def movie(imdbID):
     movie = mongo.db.movies.find_one({"imdbID": imdbID})
-    return render_template("movie.html", movie=movie)
+    reviews = mongo.db.reviews.find()
+    return render_template("movie.html", movie=movie, reviews=reviews)
 
 @app.route("/add_review/<imdbID>", methods=["GET", "POST"])
 def add_review(imdbID):
@@ -146,11 +147,15 @@ def add_review(imdbID):
     if request.method == "POST":
         review = {
             "review": request.form.get("add_review"),
-            "movie": movie.title,
+            "movie": movie["title"],
+            "imdbID": movie["imdbID"],
             "added_by": session["user"]
         }
+        print(review)
         mongo.db.reviews.insert_one(review)
         flash("Review added successfully!")
+        return redirect(url_for("movie", imdbID=movie["imdbID"]))
+        
     return render_template("add_review.html", movie=movie)
 
 if __name__ == "__main__":
