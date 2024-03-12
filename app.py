@@ -25,7 +25,16 @@ def sort_movies(movie_list):
     for movie in movie_list:
         if movie["Type"] == "movie":
             movies_sorted.append(movie)
-    return movies_sorted        
+    return movies_sorted   
+
+def top_rated(reviews):
+    most_likes = 0
+    top_rated = None
+    for review in reviews:
+        if review["NoStars"] > most_likes:
+            most_likes =  review["NoStars"]  
+            top_rated = review["review"]
+        return top_rated
 
 
 # Template rendering
@@ -41,9 +50,24 @@ def search():
     movies = list(mongo.db.movies.find())
     title = request.form.get("searchMovies")
     url_end = "&s=" + str(title).replace(" ", "_")
-    search = requests.get("https://www.omdbapi.com/?i=tt3896198&apikey=8acb1c61" + url_end).json()
-    response = (search["Search"])
-    movies_sorted = sort_movies(response)
+    try:
+        title = request.form.get("searchMovies")
+        url_end = "&s=" + str(title).lower().replace(" ", "_")
+        response = requests.get("https://www.omdbapi.com/?i=tt3896198&apikey=8acb1c61" + url_end)
+        if response.status_code == 200:
+            search = response.json()
+            if "Search" in search:
+                response = (search["Search"])
+                movies_sorted = sort_movies(response)
+                return render_template("search.html", movies_sorted=movies_sorted, movies=movies, title=title)
+            else:
+                flash("No such movie")
+                return redirect(url_for("search"))
+        else:
+            flash(f"Error: {response.status_code} - {response.reason}")
+    except requests.RequestException as e:
+        flash(f"Error fulfilling request: {e}")
+        return redirect(url_for("search"))
     return render_template("search.html", movies_sorted=movies_sorted, movies=movies, title=title)
 
 ## Prifile functionality from Taskmanager Project
@@ -139,7 +163,8 @@ def add_movie(imdbID):
 def movie(imdbID):
     movie = mongo.db.movies.find_one({"imdbID": imdbID})
     reviews = list(mongo.db.reviews.find())
-    return render_template("movie.html", movie=movie, reviews=reviews)
+    top = top_rated(reviews)
+    return render_template("movie.html", movie=movie, reviews=reviews, top=top)
 
 @app.route("/add_review/<imdbID>", methods=["GET", "POST"])
 def add_review(imdbID):
@@ -176,6 +201,26 @@ def delete_review(imdbID, review_id):
     mongo.db.reviews.delete_one({"_id": ObjectId(review_id)})
     flash("Review successfully deleted")
     return redirect(url_for("movie", imdbID=imdbID))
+
+@app.route("/rate_review//<review_id>/<imdbID>")
+def rate_review(imdbID, review_id):
+    movie = mongo.db.movies.find_one({"imdbID": imdbID})
+    review_to_edit = mongo.db.reviews.find_one({"_id": ObjectId(review_id)})
+
+    star = {
+        "NoStars": 0
+    }
+
+    like = {
+        "liked_by": session["user"]
+    }
+
+    if session["user"] not in review_to_edit["liked_by"]:
+        mongo.db.reviews.update_one({"_id": ObjectId(review_id)}, {"$inc":  star})
+        mongo.db.reviews.update_one({"_id": ObjectId(review_id)}, {"$push":  like})
+    else:
+        flash("You already liked this review")
+        return redirect(url_for("movie", imdbID=imdbID, review_to_edit=review_to_edit))
 
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
