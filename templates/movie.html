@@ -82,7 +82,9 @@
                                                     <p class="py-4">No reviews yet</p>
                                                 {% endif %}
                                             </div>
-                                            <a class="btn btn-large btn-dark-brown" href="{{ url_for('add_review', imdbID=movie.imdbID) }}">Add a review</a>
+                                            {% if session["user"] %}
+                                                <a class="btn btn-large btn-dark-brown" href="{{ url_for('add_review', imdbID=movie.imdbID) }}">Add a review</a>
+                                            {% endif %}
                                         </div>
                                     </div>
                                 </div>
