@@ -1,5 +1,0 @@
-for get_movies card
-
-<p>{{ item.Director }}</p>
-<p>{{ item.Genre }}</p>
-<p>{{ item.Plot }}</p>
