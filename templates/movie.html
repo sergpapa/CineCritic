@@ -38,11 +38,19 @@
                                             <p>Added By: <strong>{{ movie.added_by }}</strong></p>
                                         </div>
                                     </div>
-                                    <div class="row review py-2 review-box">
+                                    <div class="row text-center">
                                         <div class="col">
-                                            <p>{{ top }}</p>
+                                            {% set url = "https://www.imdb.com/title/" + movie.imdbID %}
+                                            <a class="btn btn-brown" href="{{ url }}" target="_blank">See movie on IMDB</a>
                                         </div>
                                     </div>
+                                    {% if top != None %}
+                                        <div class="row review py-2 mx-2 review-box">
+                                            <div class="col">
+                                                <p>{{ top }}</p>
+                                            </div>
+                                        </div>
+                                    {% endif %}
                                     <div class="row">
                                         <div class="col">
                                             <h5 class="my-4">Reviews</h5>
@@ -71,7 +79,7 @@
                                                     <p class="py-4">No reviews yet</p>
                                                 {% endif %}
                                             </div>
-                                            <a class="btn btn-large btn-brown" href="{{ url_for('add_review', imdbID=movie.imdbID) }}">Add a review</a>
+                                            <a class="btn btn-large btn-dark-brown" href="{{ url_for('add_review', imdbID=movie.imdbID) }}">Add a review</a>
                                         </div>
                                     </div>
                                 </div>

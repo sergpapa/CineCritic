@@ -34,7 +34,7 @@ def top_rated(reviews):
         if review["NoStars"] > most_likes:
             most_likes =  review["NoStars"]  
             top_rated = review["review"]
-        return top_rated
+    return top_rated
 
 
 # Template rendering
@@ -174,7 +174,9 @@ def add_review(imdbID):
             "review": request.form.get("add_review"),
             "movie": movie["title"],
             "imdbID": movie["imdbID"],
-            "added_by": session["user"]
+            "added_by": session["user"],
+            "NoStars": 0,
+            "liked_by": []
         }
         mongo.db.reviews.insert_one(review)
         flash("Review added successfully!")
@@ -202,13 +204,13 @@ def delete_review(imdbID, review_id):
     flash("Review successfully deleted")
     return redirect(url_for("movie", imdbID=imdbID))
 
-@app.route("/rate_review//<review_id>/<imdbID>")
+@app.route("/rate_review/<review_id>/<imdbID>")
 def rate_review(imdbID, review_id):
     movie = mongo.db.movies.find_one({"imdbID": imdbID})
     review_to_edit = mongo.db.reviews.find_one({"_id": ObjectId(review_id)})
 
     star = {
-        "NoStars": 0
+        "NoStars": 1
     }
 
     like = {
@@ -220,7 +222,7 @@ def rate_review(imdbID, review_id):
         mongo.db.reviews.update_one({"_id": ObjectId(review_id)}, {"$push":  like})
     else:
         flash("You already liked this review")
-        return redirect(url_for("movie", imdbID=imdbID, review_to_edit=review_to_edit))
+        return redirect(url_for("movie", imdbID=imdbID, review_to_edit=review_to_edit, movie=movie))
 
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
