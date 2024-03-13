@@ -1,2 +1,2 @@
 web: python app.py
-web: gunicorn mysite.wsgi
+web: gunicorn cine-critic.wsgi
