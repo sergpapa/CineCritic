@@ -154,7 +154,7 @@ def add_movie(imdbID):
             flash("Movie added successfully")
             return render_template("movies_list.html", movies=movies)
     else:
-        flash("You must be logged in to add a movie")
+        flash("~ You must be logged in to add a movie ~")
     movies = list(mongo.db.movies.find())
     return redirect(url_for("search"))
 
