@@ -220,6 +220,7 @@ def rate_review(imdbID, review_id):
     if session["user"] not in review_to_edit["liked_by"]:
         mongo.db.reviews.update_one({"_id": ObjectId(review_id)}, {"$inc":  star})
         mongo.db.reviews.update_one({"_id": ObjectId(review_id)}, {"$push":  like})
+        return redirect(url_for("movie", imdbID=imdbID, review_to_edit=review_to_edit, movie=movie))
     else:
         flash("You already liked this review")
         return redirect(url_for("movie", imdbID=imdbID, review_to_edit=review_to_edit, movie=movie))

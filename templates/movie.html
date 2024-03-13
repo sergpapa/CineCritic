@@ -70,7 +70,9 @@
                                                                         </div>
                                                                     {% elif session["user"] != review.added_by %}
                                                                         <div class="mx-auto">
-                                                                            <a class="star" href="{{ url_for('rate_review', review_id=review._id, imdbID=movie.imdbID) }}"><i class="fa-solid fa-star"></i></a>
+                                                                            {% if session["user"] not in review.liked_by %}
+                                                                                <a class="star" href="{{ url_for('rate_review', review_id=review._id, imdbID=movie.imdbID) }}"><i class="fa-solid fa-star"></i></a>
+                                                                            {% endif %}
                                                                             <p><small><i>Liked by: </i>{{ review.NoStars }}</small></p>
                                                                         </div>
                                                                     {% endif %}
