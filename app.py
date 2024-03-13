@@ -135,8 +135,9 @@ def logout():
 
 @app.route("/add_movie/<imdbID>")
 def add_movie(imdbID):
+    movies = list(mongo.db.movies.find())
     existing_movie = mongo.db.movies.find_one({"imdbID": imdbID})
-    if 'username' in session:
+    if session["user"]:
         if existing_movie:
             flash("Movie already in database")
         else:
