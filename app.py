@@ -182,7 +182,7 @@ def add_review(imdbID):
             "liked_by": []
         }
         mongo.db.reviews.insert_one(review)
-        mongo.db.movies.update_one({"_id": ObjectId(imdbID)}, {"$inc":  1})
+        mongo.db.movies.update_one({"imdbID": imdbID}, {"$inc":  {"reviews": 1}})
         flash("Review added successfully!")
         return redirect(url_for("movie", imdbID=movie["imdbID"]))
         
@@ -205,6 +205,7 @@ def edit_review(review_id, imdbID):
 @app.route("/delete_review/<review_id>/<imdbID>")
 def delete_review(imdbID, review_id):
     mongo.db.reviews.delete_one({"_id": ObjectId(review_id)})
+    mongo.db.movies.update_one({"imdbID": imdbID}, {"$inc":  {"reviews": -1}})
     flash("Review successfully deleted")
     return redirect(url_for("movie", imdbID=imdbID))
 

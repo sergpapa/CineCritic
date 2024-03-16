@@ -57,7 +57,7 @@
                                             <div class="container-brown py-2 review-box">
                                                 <div class="row">
                                                     <div class="col">
-                                                        {% if reviews|length >= 1 %}
+                                                        {% if movie.reviews >= 1 %}
                                                             {% for review in reviews %}
                                                                 {% if review.imdbID == movie.imdbID %}
                                                                     <div class="review my-2 py-2">
