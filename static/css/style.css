@@ -2,6 +2,14 @@ h1 {
     font-weight: 600;
 }
 
+.nav-bar {
+    width: 180px;
+}
+
+.nav-pills .nav-link.active {
+    background-color:#56482f;
+}
+
 .nav-bar li {
     list-style: none;
 }
