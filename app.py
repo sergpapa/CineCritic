@@ -41,7 +41,7 @@ def top_rated(reviews):
 
 @app.route("/movies_list")
 def movies_list():
-    movies = list(mongo.db.movies.find())
+    movies = list(mongo.db.movies.find().sort({"_id": -1}))
     return render_template("movies_list.html", movies=movies)
 
 @app.route("/")
@@ -153,6 +153,7 @@ def add_movie(imdbID):
                 "reviews": 0
             }
             mongo.db.movies.insert_one(movie_to_add)
+            movies = list(mongo.db.movies.find()).sort(-1)
             flash("Movie added successfully")
             return render_template("movies_list.html", movies=movies)
     else:
