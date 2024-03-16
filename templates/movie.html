@@ -54,13 +54,13 @@
                                     <div class="row">
                                         <div class="col">
                                             <h5 class="my-4">Reviews</h5>
-                                            <div class="container-brown py-2 review-box">
+                                            <div class="container-fluid container-brown py-2 review-box">
                                                 <div class="row">
-                                                    <div class="col">
+                                                    <div class="col px-0">
                                                         {% if movie.reviews >= 1 %}
                                                             {% for review in reviews %}
                                                                 {% if review.imdbID == movie.imdbID %}
-                                                                    <div class="review my-2 py-2">
+                                                                    <div class="review my-2 p-2">
                                                                         <p class="mb-0">{{ review.review }}</p>
                                                                         <small><strong>By {{ review.added_by }}</strong></small>
                                                                         {% if session["user"] %}
