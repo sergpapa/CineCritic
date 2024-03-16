@@ -149,7 +149,8 @@ def add_movie(imdbID):
                 "year": movie["Year"],
                 "poster": movie["Poster"],
                 "imdbID": movie["imdbID"],
-                "added_by": session["user"]
+                "added_by": session["user"],
+                "reviews": 0
             }
             mongo.db.movies.insert_one(movie_to_add)
             flash("Movie added successfully")
@@ -180,6 +181,7 @@ def add_review(imdbID):
             "liked_by": []
         }
         mongo.db.reviews.insert_one(review)
+        mongo.db.movies.update_one({"_id": ObjectId(imdbID)}, {"$inc":  1})
         flash("Review added successfully!")
         return redirect(url_for("movie", imdbID=movie["imdbID"]))
         
@@ -199,7 +201,7 @@ def edit_review(review_id, imdbID):
         
     return render_template("edit_review.html", movie=movie, review_to_edit=review_to_edit)
 
-@app.route("/delete_review//<review_id>/<imdbID>")
+@app.route("/delete_review/<review_id>/<imdbID>")
 def delete_review(imdbID, review_id):
     mongo.db.reviews.delete_one({"_id": ObjectId(review_id)})
     flash("Review successfully deleted")

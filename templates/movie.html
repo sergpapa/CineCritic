@@ -55,34 +55,42 @@
                                         <div class="col">
                                             <h5 class="my-4">Reviews</h5>
                                             <div class="container-brown py-2 review-box">
-                                            
-                                                {% if reviews|length >= 1 %}
-                                                    {% for review in reviews %}
-                                                        {% if review.imdbID == movie.imdbID %}
-                                                            <div class="review my-2 py-2">
-                                                                <p class="mb-0">{{ review.review }}</p>
-                                                                <small><strong>By {{ review.added_by }}</strong></small>
-                                                                {% if session["user"] %}
-                                                                    {% if session["user"] == review.added_by %}
-                                                                        <div class="mx-auto">
-                                                                            <a class="btn btn-small btn-brown" href="{{ url_for('edit_review', review_id=review._id, imdbID=movie.imdbID)  }}">Edit</a> 
-                                                                            <a class="btn btn-small btn-dark-brown" href="{{ url_for('delete_review', review_id=review._id, imdbID=movie.imdbID)  }}">Delete</a>
-                                                                        </div>
-                                                                    {% elif session["user"] != review.added_by %}
-                                                                        <div class="mx-auto">
-                                                                            {% if session["user"] not in review.liked_by %}
-                                                                                <a class="star" href="{{ url_for('rate_review', review_id=review._id, imdbID=movie.imdbID) }}"><i class="fa-solid fa-star"></i></a>
+                                                <div class="row">
+                                                    <div class="col">
+                                                        {% if reviews|length >= 1 %}
+                                                            {% for review in reviews %}
+                                                                {% if review.imdbID == movie.imdbID %}
+                                                                    <div class="review my-2 py-2">
+                                                                        <p class="mb-0">{{ review.review }}</p>
+                                                                        <small><strong>By {{ review.added_by }}</strong></small>
+                                                                        {% if session["user"] %}
+                                                                            {% if session["user"] == review.added_by %}
+                                                                                <div class="mx-auto">
+                                                                                    <a class="btn btn-small btn-brown" href="{{ url_for('edit_review', review_id=review._id, imdbID=movie.imdbID)  }}">Edit</a> 
+                                                                                    <a class="btn btn-small btn-dark-brown" href="{{ url_for('delete_review', review_id=review._id, imdbID=movie.imdbID)  }}">Delete</a>
+                                                                                </div>
+                                                                            {% elif session["user"] != review.added_by %}
+                                                                                <div class="mx-auto">
+                                                                                    {% if session["user"] not in review.liked_by %}
+                                                                                        <a class="star" href="{{ url_for('rate_review', review_id=review._id, imdbID=movie.imdbID) }}"><i class="fa-solid fa-star"></i></a>
+                                                                                    {% endif %}
+                                                                                    <p><small><i>Liked by: </i>{{ review.NoStars }}</small></p>
+                                                                                </div>
                                                                             {% endif %}
-                                                                            <p><small><i>Liked by: </i>{{ review.NoStars }}</small></p>
-                                                                        </div>
-                                                                    {% endif %}
+                                                                        {% endif %}
+                                                                    </div>
                                                                 {% endif %}
+                                                            {% endfor %}
+                                                        {% else %}
+                                                            <div class="row">
+                                                                <div class="col">
+                                                                    <p class="py-4">No reviews yet</p>
+                                                                </div>
                                                             </div>
                                                         {% endif %}
-                                                    {% endfor %}
-                                                {% else %}
-                                                    <p class="py-4">No reviews yet</p>
-                                                {% endif %}
+                                                    </div>
+                                                </div>
+                                              
                                             </div>
                                             {% if session["user"] %}
                                                 <a class="btn btn-large btn-dark-brown" href="{{ url_for('add_review', imdbID=movie.imdbID) }}">Add a review</a>
