@@ -153,7 +153,7 @@ def add_movie(imdbID):
                 "reviews": 0
             }
             mongo.db.movies.insert_one(movie_to_add)
-            movies = list(mongo.db.movies.find()).sort(-1)
+            movies = list(mongo.db.movies.find())
             flash("Movie added successfully")
             return render_template("movies_list.html", movies=movies)
     else:
