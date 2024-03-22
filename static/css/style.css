@@ -2,6 +2,10 @@ h1 {
     font-weight: 600;
 }
 
+small {
+    font-size: .8em;
+}
+
 .flash {
     font-size: larger;
     color: blue;
@@ -9,7 +13,9 @@ h1 {
 }
 
 .nav-bar {
+    position: abolute;
     width: 275px;
+    height: 100%;
 }
 
 .nav-pills .nav-link.active {
@@ -32,6 +38,10 @@ h1 {
 
 .text-bez {
     color: #72603e;
+}
+
+.input-group {
+    width: auto;
 }
 
 .input-group-text {
