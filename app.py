@@ -38,37 +38,43 @@ def top_rated(reviews):
 
 
 # Template rendering
-
+@app.route("/")
 @app.route("/movies_list")
 def movies_list():
     movies = list(mongo.db.movies.find().sort({"_id": -1}))
-    return render_template("movies_list.html", movies=movies)
+    if len(movies) > 0 :
+        return render_template("movies_list.html", movies=movies)
+    else:
+        return flash("No movies added ye")
 
-@app.route("/")
+
 @app.route("/search", methods=["GET", "POST"])
 def search():
-    movies = list(mongo.db.movies.find())
-    title = request.form.get("searchMovies")
-    url_end = "&s=" + str(title).replace(" ", "_")
-    try:
+    if session["user"]:
+        movies = list(mongo.db.movies.find())
         title = request.form.get("searchMovies")
-        url_end = "&s=" + str(title).lower().replace(" ", "_")
-        response = requests.get("https://www.omdbapi.com/?i=tt3896198&apikey=8acb1c61" + url_end)
-        if response.status_code == 200:
-            search = response.json()
-            if "Search" in search:
-                response = (search["Search"])
-                movies_sorted = sort_movies(response)
-                return render_template("search.html", movies_sorted=movies_sorted, movies=movies, title=title)
+        url_end = "&s=" + str(title).replace(" ", "_")
+        try:
+            title = request.form.get("searchMovies")
+            url_end = "&s=" + str(title).lower().replace(" ", "_")
+            response = requests.get("https://www.omdbapi.com/?i=tt3896198&apikey=8acb1c61" + url_end)
+            if response.status_code == 200:
+                search = response.json()
+                if "Search" in search:
+                    response = (search["Search"])
+                    movies_sorted = sort_movies(response)
+                    return render_template("search.html", movies_sorted=movies_sorted, movies=movies, title=title)
+                else:
+                    flash("No such movie")
+                    return redirect(url_for("search"))
             else:
-                flash("No such movie")
-                return redirect(url_for("search"))
-        else:
-            flash(f"Error: {response.status_code} - {response.reason}")
-    except requests.RequestException as e:
-        flash(f"Error fulfilling request: {e}")
-        return redirect(url_for("search"))
-    return render_template("search.html", movies_sorted=movies_sorted, movies=movies, title=title)
+                flash(f"Error: {response.status_code} - {response.reason}")
+        except requests.RequestException as e:
+            flash(f"Error fulfilling request: {e}")
+            return redirect(url_for("search"))
+        return render_template("search.html", movies_sorted=movies_sorted, movies=movies, title=title)
+    else:
+        return redirect(url_for("login"))
 
 ## Prifile functionality from Taskmanager Project
 @app.route("/register", methods=["GET", "POST"])
@@ -118,10 +124,12 @@ def login():
 
 @app.route("/profile/<username>", methods=["GET", "POST"])
 def profile(username):
-    username = mongo.db.users.find_one(
-        {"username": session["user"]})["username"]
     if session["user"]:
+        username = mongo.db.users.find_one(
+        {"username": session["user"]})["username"]
         return render_template("profile.html", username=username)
+    else: 
+        return redirect(url_for("movies_list"))
 
     return render_template("login.html")
 
