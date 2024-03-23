@@ -8,99 +8,122 @@
                 </div>
             </div>
             <div class="row mb-4">
-                    <div class="col">
-                        <div class="container container-brown rounded p-2 text-center">
-                            <div class="row mt-4">
-                                <div class="col text-bez">
-                                    <h2>~ {{ movie.title }} ~</h2>
-                                </div>
+                <div class="col">
+                    <div class="container container-brown rounded p-2 text-center">
+                        <div class="row mt-4">
+                            <div class="col text-bez">
+                                <h2>~ {{ movie.title }} ~</h2>
                             </div>
-                            <div class="row p-2">
-                                <div class="col-6 my-4">
-                                    {% if movie.poster != "N/A" %}
-                                        <img src="{{ movie.poster }}" class="card-img-top poster" alt="Poster of {{ movie.Title }}">
-                                    {% else %}
-                                        <!-- Fallback image in case poster doesn't exist -->
-                                        <img src="https://placehold.co/300x400" class="card-img-top" alt="Fallback Poster">
-                                    {% endif %}
+                        </div>
+                        <div class="row p-2">
+                            <div class="col-6 my-4">
+                                {% if movie.poster != "N/A" %}
+                                    <img src="{{ movie.poster }}" class="card-img-top poster" alt="Poster of {{ movie.Title }}">
+                                {% else %}
+                                    <!-- Fallback image in case poster doesn't exist -->
+                                    <img src="https://placehold.co/300x400" class="card-img-top" alt="Fallback Poster">
+                                {% endif %}
+                            </div>
+                            <div class="col-5 ml-4 text-bez">
+                                <div class="row">
+                                    <div class="col">
+                                        <h5 class="my-4">Details</h5>
+                                    </div>
                                 </div>
-                                <div class="col-5 ml-4 text-bez">
-                                    <div class="row">
+                                <div class="row">
+                                    <div class="col-6 text-right">
+                                        <p>Year of release: <strong>{{ movie.year }}</strong></p>
+                                    </div>
+                                    <div class="col-6 text-left">
+                                        <p>Added By: <strong>{{ movie.added_by }}</strong></p>
+                                    </div>
+                                </div>
+                                <div class="row text-center">
+                                    <div class="col">
+                                        {% set url = "https://www.imdb.com/title/" + movie.imdbID %}
+                                        <a class="btn btn-brown" href="{{ url }}" target="_blank">See movie on IMDB</a>
+                                    </div>
+                                </div>
+                                {% if top != None %}
+                                    <div class="row review py-2 mx-2 review-box">
                                         <div class="col">
-                                            <h5 class="my-4">Details</h5>
+                                            <p>{{ top }}</p>
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-6 text-right">
-                                            <p>Year of release: <strong>{{ movie.year }}</strong></p>
-                                        </div>
-                                        <div class="col-6 text-left">
-                                            <p>Added By: <strong>{{ movie.added_by }}</strong></p>
-                                        </div>
-                                    </div>
-                                    <div class="row text-center">
-                                        <div class="col">
-                                            {% set url = "https://www.imdb.com/title/" + movie.imdbID %}
-                                            <a class="btn btn-brown" href="{{ url }}" target="_blank">See movie on IMDB</a>
-                                        </div>
-                                    </div>
-                                    {% if top != None %}
-                                        <div class="row review py-2 mx-2 review-box">
-                                            <div class="col">
-                                                <p>{{ top }}</p>
-                                            </div>
-                                        </div>
-                                    {% endif %}
-                                    <div class="row">
-                                        <div class="col">
-                                            <h5 class="my-4">Reviews</h5>
-                                            <div class="container-fluid container-brown py-2 review-box">
-                                                <div class="row">
-                                                    <div class="col px-0">
-                                                        {% if movie.reviews >= 1 %}
-                                                            {% for review in reviews %}
-                                                                {% if review.imdbID == movie.imdbID %}
-                                                                    <div class="review my-2 p-2">
-                                                                        <p class="mb-0">{{ review.review }}</p>
-                                                                        <small><strong>By {{ review.added_by }}</strong></small>
-                                                                        {% if session["user"] %}
-                                                                            {% if session["user"] == review.added_by %}
-                                                                                <div class="mx-auto">
-                                                                                    <a class="btn btn-small btn-brown" href="{{ url_for('edit_review', review_id=review._id, imdbID=movie.imdbID)  }}">Edit</a> 
-                                                                                    <a class="btn btn-small btn-dark-brown" href="{{ url_for('delete_review', review_id=review._id, imdbID=movie.imdbID)  }}">Delete</a>
+                                {% endif %}
+                                <div class="row">
+                                    <div class="col">
+                                        <h5 class="my-4">Reviews</h5>
+                                        <div class="container-fluid container-brown py-2 review-box">
+                                            <div class="row">
+                                                <div class="col px-0">
+                                                    {% if movie.reviews >= 1 %}
+                                                        {% for review in reviews %}
+                                                            {% if review.imdbID == movie.imdbID %}
+
+                                                                <!-- Review -->
+                                                                <div class="review my-2 p-2">
+                                                                    <p class="mb-0">{{ review.review }}</p>
+                                                                    <small><strong>By {{ review.added_by }}</strong></small>
+                                                                    {% if session["user"] %}
+                                                                        {% if session["user"] == review.added_by %}
+                                                                            <div class="mx-auto">
+                                                                                <a class="btn btn-small btn-brown" href="{{ url_for('edit_review', review_id=review._id, imdbID=movie.imdbID)  }}">Edit</a> 
+                                                                                <a class="btn btn-small btn-dark-brown" data-toggle="modal" data-target="#DeleteReview">Delete</a>
+                                                                            </div>
+
+                                                                             <!-- Delete Modal -->
+                                                                            <div class="modal fade" id="DeleteReview" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                                <div class="modal-dialog">
+                                                                                    <div class="modal-content">
+                                                                                            <div class="modal-header">
+                                                                                            <h5 class="modal-title" id="DeleteReviewLabel">Delete Review</h5>
+                                                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                                <span aria-hidden="true">&times;</span>
+                                                                                            </button>
+                                                                                        </div>
+                                                                                        <div class="modal-body">
+                                                                                            <p>{{ review.review }}</p>
+                                                                                        </div>
+                                                                                        <div class="modal-footer">
+                                                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                                                                            <a type="button" class="btn btn-dark-brown" href="{{ url_for('delete_review', review_id=review._id, imdbID=movie.imdbID)  }}">Delete</a>
+                                                                                        </div>
+                                                                                    </div>
                                                                                 </div>
-                                                                            {% elif session["user"] != review.added_by %}
-                                                                                <div class="mx-auto">
-                                                                                    {% if session["user"] not in review.liked_by %}
-                                                                                        <a class="star" href="{{ url_for('rate_review', review_id=review._id, imdbID=movie.imdbID) }}"><i class="fa-solid fa-star"></i></a>
-                                                                                    {% endif %}
-                                                                                    <p><small><i>Liked by: </i>{{ review.NoStars }}</small></p>
-                                                                                </div>
-                                                                            {% endif %}
+                                                                            </div>
+                                                                        {% elif session["user"] != review.added_by %}
+                                                                            <div class="mx-auto">
+                                                                                {% if session["user"] not in review.liked_by %}
+                                                                                    <a class="star" href="{{ url_for('rate_review', review_id=review._id, imdbID=movie.imdbID) }}"><i class="fa-solid fa-star"></i></a>
+                                                                                {% endif %}
+                                                                                <p><small><i>Liked by: </i>{{ review.NoStars }}</small></p>
+                                                                            </div>
                                                                         {% endif %}
-                                                                    </div>
-                                                                {% endif %}
-                                                            {% endfor %}
-                                                        {% else %}
-                                                            <div class="row">
-                                                                <div class="col">
-                                                                    <p class="py-4">No reviews yet</p>
+                                                                    {% endif %}
                                                                 </div>
+                                                            {% endif %}
+                                                        {% endfor %}
+                                                    {% else %}
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <p class="py-4">No reviews yet</p>
                                                             </div>
-                                                        {% endif %}
-                                                    </div>
+                                                        </div>
+                                                    {% endif %}
                                                 </div>
-                                              
                                             </div>
-                                            {% if session["user"] %}
-                                                <a class="btn btn-large btn-dark-brown" href="{{ url_for('add_review', imdbID=movie.imdbID) }}">Add a review</a>
-                                            {% endif %}
+                                            
                                         </div>
+                                        {% if session["user"] %}
+                                            <a class="btn btn-large btn-dark-brown" href="{{ url_for('add_review', imdbID=movie.imdbID) }}">Add a review</a>
+                                        {% endif %}
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                </div>
             </div>
             <div class="row">
                 <div class="col text-center footer-margin">
