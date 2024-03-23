@@ -8,6 +8,37 @@
                         <h3>{{ username }}'s Profile</h3>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col text-left ml-4">
+                        <h4>My reviews</h4>
+                        <hr/>
+                    </div>
+                </div>
+                {% for review in reviews %}
+                    <div class="row">
+                        <div class="col">
+                            {% if review.added_by == session["user"] %}
+                                <div class="container">
+                                    <div class="row  review-list-item">
+                                        <div class="col-6 col-md-3">
+                                            <p class="text-left ml-4 pt-4"><strong>{{ review.movie }}</strong></p>
+                                        </div>
+                                        <div class="col-5 text-left pt-4">
+                                            <p class="review-list-details">{{ review.review }}</p>
+                                        </div>
+                                        <div class="col-12 col-lg-4">
+                                            <div class="mx-auto">
+                                                <a class="btn btn-small btn-brown" href="{{ url_for('movie', imdbID=review.imdbID) }}">Go to movie Card</a> 
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr/>
+                                </div>
+                                
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endfor %}
             </div>
         </div>
     </div>

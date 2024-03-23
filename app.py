@@ -119,10 +119,12 @@ def login():
 
 @app.route("/profile/<username>", methods=["GET", "POST"])
 def profile(username):
+    movies = list(mongo.db.movies.find())
+    reviews = list(mongo.db.reviews.find().sort({"_id": -1}))
     username = mongo.db.users.find_one(
         {"username": session["user"]})["username"]
     if session["user"]:
-        return render_template("profile.html", username=username)
+        return render_template("profile.html", username=username, reviews=reviews, movies=movies)
 
     return render_template("login.html")
 
