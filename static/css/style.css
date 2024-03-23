@@ -165,8 +165,6 @@ footer {
 }
 
 .review-box {
-    max-height: 150px;
-    overflow-y: auto;
 }
 
 .review {

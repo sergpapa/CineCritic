@@ -174,9 +174,7 @@ def add_movie(imdbID):
 def movie(imdbID):
     movie = mongo.db.movies.find_one({"imdbID": imdbID})
     reviews = list(mongo.db.reviews.find())
-    top = top_rated(reviews,imdbID)
-    print("Top = ", top)
-    return render_template("movie.html", movie=movie, reviews=reviews, top=top)
+    return render_template("movie.html", movie=movie, reviews=reviews)
 
 @app.route("/add_review/<imdbID>", methods=["GET", "POST"])
 def add_review(imdbID):
