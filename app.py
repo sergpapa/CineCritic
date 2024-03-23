@@ -53,6 +53,10 @@ def movies_list():
 @app.route("/search", methods=["GET", "POST"])
 def search():
     movies = list(mongo.db.movies.find())
+    for movie in movies:
+        if movie["reviews"] == 0:
+             mongo.db.movies.delete_one(movie)
+    movies = list(mongo.db.movies.find().sort({"_id": -1}))
     title = request.form.get("searchMovies")
     url_end = "&s=" + str(title).replace(" ", "_")
     try:
@@ -166,6 +170,10 @@ def add_movie(imdbID):
     else:
         flash("~ You must be logged in to add a movie ~")
     movies = list(mongo.db.movies.find())
+    for movie in movies:
+        if movie["reviews"] == 0:
+             mongo.db.movies.delete_one(movie)
+    movies = list(mongo.db.movies.find().sort({"_id": -1}))
     return redirect(url_for("search"))
 
 
@@ -174,6 +182,7 @@ def movie(imdbID):
     movie = mongo.db.movies.find_one({"imdbID": imdbID})
     reviews = list(mongo.db.reviews.find())
     top = top_rated(reviews,imdbID)
+    print(top)
     return render_template("movie.html", movie=movie, reviews=reviews, top=top)
 
 @app.route("/add_review/<imdbID>", methods=["GET", "POST"])
