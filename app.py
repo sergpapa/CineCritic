@@ -43,6 +43,10 @@ def top_rated(reviews, imdbID):
 @app.route("/movies_list")
 def movies_list():
     movies = list(mongo.db.movies.find().sort({"_id": -1}))
+    for movie in movies:
+        if movie["reviews"] == 0:
+             mongo.db.movies.delete_one(movie)
+    movies = list(mongo.db.movies.find().sort({"_id": -1}))
     return render_template("movies_list.html", movies=movies)
 
 
@@ -156,9 +160,9 @@ def add_movie(imdbID):
                 "reviews": 0
             }
             mongo.db.movies.insert_one(movie_to_add)
-            movies = list(mongo.db.movies.find().sort({"_id": -1}))
+            movie = mongo.db.movies.find_one({"imdbID": movie_to_add["imdbID"]})
             flash("Movie added successfully")
-            return render_template("movies_list.html", movies=movies)
+            return render_template("movie.html", movie=movie)
     else:
         flash("~ You must be logged in to add a movie ~")
     movies = list(mongo.db.movies.find())
