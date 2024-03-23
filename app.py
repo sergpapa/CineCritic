@@ -27,16 +27,6 @@ def sort_movies(movie_list):
             movies_sorted.append(movie)
     return movies_sorted   
 
-def top_rated(reviews, imdbID):
-    most_likes = 0
-    top_rated = None
-    for review in reviews:
-        if review["imdbID"] == imdbID:
-            if review["NoStars"] > most_likes:
-                most_likes =  review["NoStars"]  
-                top_rated = review["review"]
-    return top_rated
-
 
 # Template rendering
 @app.route("/")
@@ -158,6 +148,9 @@ def add_movie(imdbID):
             movie_to_add = {
                 "title": movie["Title"],
                 "year": movie["Year"],
+                "director": movie["Director"],
+                "plot": movie["Plot"],
+                "actors": movie["Actors"],
                 "poster": movie["Poster"],
                 "imdbID": movie["imdbID"],
                 "added_by": session["user"],
@@ -182,7 +175,7 @@ def movie(imdbID):
     movie = mongo.db.movies.find_one({"imdbID": imdbID})
     reviews = list(mongo.db.reviews.find())
     top = top_rated(reviews,imdbID)
-    print(top)
+    print("Top = ", top)
     return render_template("movie.html", movie=movie, reviews=reviews, top=top)
 
 @app.route("/add_review/<imdbID>", methods=["GET", "POST"])
