@@ -186,7 +186,8 @@ def add_review(imdbID):
             "imdbID": movie["imdbID"],
             "added_by": session["user"],
             "thumbs_up": 0,
-            "liked_by": []
+            "thumds_down": 0,
+            "rated_by": []
         }
         mongo.db.reviews.insert_one(review)
         mongo.db.movies.update_one({"imdbID": imdbID}, {"$inc":  {"reviews": 1}})
@@ -216,25 +217,46 @@ def delete_review(imdbID, review_id):
     flash("Review successfully deleted")
     return redirect(url_for("movie", imdbID=imdbID))
 
-@app.route("/rate_review/<review_id>/<imdbID>")
-def rate_review(imdbID, review_id):
+@app.route("/like_review/<review_id>/<imdbID>")
+def like_review(imdbID, review_id):
     movie = mongo.db.movies.find_one({"imdbID": imdbID})
-    review_to_edit = mongo.db.reviews.find_one({"_id": ObjectId(review_id)})
+    review_to_rate = mongo.db.reviews.find_one({"_id": ObjectId(review_id)})
 
     thumbs_up = {
         "thumbs_up": 1
     }
 
     like = {
-        "liked_by": session["user"]
+        "rated_by": session["user"]
     }
 
-    if session["user"] not in review_to_edit["liked_by"]:
+    if session["user"] not in review_to_rate["rated_by"]:
         mongo.db.reviews.update_one({"_id": ObjectId(review_id)}, {"$inc":  thumbs_up})
         mongo.db.reviews.update_one({"_id": ObjectId(review_id)}, {"$push":  like})
-        return redirect(url_for("movie", imdbID=imdbID, review_to_edit=review_to_edit, movie=movie))
+        return redirect(url_for("movie", imdbID=imdbID, review_to_rate=review_to_rate, movie=movie))
     else:
-        flash("You already liked this review")
+        flash("You already rated this review")
+        return redirect(url_for("movie", imdbID=imdbID, review_to_edit=review_to_edit, movie=movie))
+
+@app.route("/dislike_review/<review_id>/<imdbID>")
+def dislike_review(imdbID, review_id):
+    movie = mongo.db.movies.find_one({"imdbID": imdbID})
+    review_to_rate = mongo.db.reviews.find_one({"_id": ObjectId(review_id)})
+
+    thumbs_down = {
+        "thumbs_down": 1
+    }
+
+    dislike = {
+        "rated_by": session["user"]
+    }
+
+    if session["user"] not in review_to_rate["rated_by"]:
+        mongo.db.reviews.update_one({"_id": ObjectId(review_id)}, {"$inc":  thumbs_down})
+        mongo.db.reviews.update_one({"_id": ObjectId(review_id)}, {"$push":  dislike})
+        return redirect(url_for("movie", imdbID=imdbID, review_to_rate=review_to_rate, movie=movie))
+    else:
+        flash("You already rated this review")
         return redirect(url_for("movie", imdbID=imdbID, review_to_edit=review_to_edit, movie=movie))
 
 if __name__ == "__main__":

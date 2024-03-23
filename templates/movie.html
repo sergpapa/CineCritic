@@ -108,11 +108,24 @@
                                                                     </div>
                                                                 {% elif session["user"] != review.added_by %}
                                                                     <div class="mx-auto">
-                                                                        {% if session["user"] not in review.liked_by %}
-                                                                            <a class="thumbs-up" href="{{ url_for('rate_review', review_id=review._id, imdbID=movie.imdbID) }}"><i class="fa-solid fa-thumbs-up"></i></a>
-                                                                            <a class="thumbs-up" href="{{ url_for('rate_review', review_id=review._id, imdbID=movie.imdbID) }}"><i class="fa-solid fa-thumbs-down"></i></a>
+                                                                        {% if session["user"] not in review.rated_by %}
+                                                                            <div class="container">
+                                                                                <div class="row">
+                                                                                    <div class="col-6 p-1 text-right thumbs-up">
+                                                                                        <a class="text-bez" href="{{ url_for('like_review', review_id=review._id, imdbID=movie.imdbID) }}">
+                                                                                            <i class="fa-solid fa-thumbs-up"></i>
+                                                                                        </a>
+                                                                                    </div>
+                                                                                    <div class="col-6 p-1 text-left thumbs-down">
+                                                                                        <a class="text-bez" href="{{ url_for('dislike_review', review_id=review._id, imdbID=movie.imdbID) }}">
+                                                                                            <i class="fa-solid fa-thumbs-down"></i>
+                                                                                        </a>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
                                                                         {% endif %}
-                                                                        <p><small><i>Liked by: </i>{{ review.thumbs_up }}</small></p>
+                                                                        <p class="m-0"><small><i>Liked by: </i>{{ review.thumbs_up }}</small></p>
+                                                                        <p ><small><i>Disiked by: </i>{{ review.thumbs_down }}</small></p>
                                                                     </div>
                                                                 {% endif %}
                                                             {% endif %}
