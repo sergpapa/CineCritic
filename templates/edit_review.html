@@ -21,7 +21,9 @@
                                         <div class="form-group">
                                             <label for="edit_review">Edit your review here</label>
                                             <textarea class="form-control container-brown" id="edit_review" name="edit_review"
-                                                minlength="40" maxlength="1000" rows="3" required>{{ review_to_edit.review }}</textarea>
+                                                minlength="40" maxlength="1000" rows="3" 
+                                                pattern="^(?![^\S\n]*\s{2,})(?:(?![.,?!'\s]{2}).){25,500}(?:,(?:(?![.,?!'\s]{2}).){25,500})*$"
+                                                required>{{ review_to_edit.review }}</textarea>
                                         </div>
                                         <div class="text-center">
                                             <a class="btn btn-large btn-dark-brown" href="{{ url_for('movie', imdbID=movie.imdbID) }}">Cancel</a>  
