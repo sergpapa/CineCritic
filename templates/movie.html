@@ -72,7 +72,7 @@
                                 {% if movie.reviews >= 1 %}
                                     <div class="container-fluid container-brown py-2">
                                         <div class="row">
-                                            <div class="col px-0">
+                                            <div class="col px-0 review-box">
                                                 {% for review in reviews %}
                                                     {% if review.imdbID == movie.imdbID %}
                                                         <!-- Review -->
@@ -109,9 +109,10 @@
                                                                 {% elif session["user"] != review.added_by %}
                                                                     <div class="mx-auto">
                                                                         {% if session["user"] not in review.liked_by %}
-                                                                            <a class="star" href="{{ url_for('rate_review', review_id=review._id, imdbID=movie.imdbID) }}"><i class="fa-solid fa-star"></i></a>
+                                                                            <a class="thumbs-up" href="{{ url_for('rate_review', review_id=review._id, imdbID=movie.imdbID) }}"><i class="fa-solid fa-thumbs-up"></i></a>
+                                                                            <a class="thumbs-up" href="{{ url_for('rate_review', review_id=review._id, imdbID=movie.imdbID) }}"><i class="fa-solid fa-thumbs-down"></i></a>
                                                                         {% endif %}
-                                                                        <p><small><i>Liked by: </i>{{ review.NoStars }}</small></p>
+                                                                        <p><small><i>Liked by: </i>{{ review.thumbs_up }}</small></p>
                                                                     </div>
                                                                 {% endif %}
                                                             {% endif %}

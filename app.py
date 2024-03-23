@@ -185,7 +185,7 @@ def add_review(imdbID):
             "movie": movie["title"],
             "imdbID": movie["imdbID"],
             "added_by": session["user"],
-            "NoStars": 0,
+            "thumbs_up": 0,
             "liked_by": []
         }
         mongo.db.reviews.insert_one(review)
@@ -221,8 +221,8 @@ def rate_review(imdbID, review_id):
     movie = mongo.db.movies.find_one({"imdbID": imdbID})
     review_to_edit = mongo.db.reviews.find_one({"_id": ObjectId(review_id)})
 
-    star = {
-        "NoStars": 1
+    thumbs_up = {
+        "thumbs_up": 1
     }
 
     like = {
@@ -230,7 +230,7 @@ def rate_review(imdbID, review_id):
     }
 
     if session["user"] not in review_to_edit["liked_by"]:
-        mongo.db.reviews.update_one({"_id": ObjectId(review_id)}, {"$inc":  star})
+        mongo.db.reviews.update_one({"_id": ObjectId(review_id)}, {"$inc":  thumbs_up})
         mongo.db.reviews.update_one({"_id": ObjectId(review_id)}, {"$push":  like})
         return redirect(url_for("movie", imdbID=imdbID, review_to_edit=review_to_edit, movie=movie))
     else:

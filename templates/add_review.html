@@ -22,7 +22,7 @@
                                             <label for="add_review">Write your review here</label>
                                             <textarea class="form-control container-brown" id="add_review" name="add_review"
                                                 minlength="25" maxlength="500" rows="3" placeholder="Write your review here"
-                                                pattern="^(?![^\S\n]*\s{2,})(?:(?![.,?!'\s]{2}).){25,500}(?:,(?:(?![.,?!'\s]{2}).){25,500})*$"
+                                                pattern="^(?!.* {2,})(?!.*[.,?!]{2})[\w.,?!'\s]{25,500}$"
                                                 required></textarea>
                                         </div>
                                         <div class="text-center">
