@@ -63,25 +63,7 @@
                         {% endif %}
                     </ul>
                     <hr>
-                  </div>  
-                <!--- Old Nav
-                <div class="nav-bar col-2 fixed-top d-flex flex-column">
-                    <h1 class="mt-4"><a class="m-4" href="{{ url_for('search') }}">Logo</a></h1>
-                    <ul class="my-4">
-                        {% if session.user %}
-                            <li><a href="{{ url_for('profile', username=session['user']) }}">Profile</a></li>
-                            <li><a href="{{ url_for('search') }}">Add Movie</a></li>
-                            <li><a href="{{ url_for('movies_list') }}">Movie List</a></li>
-                            {% if session.user|lower == "admin"|lower %}
-                                <li><a href="{{ url_for('get_categories') }}">Manage Categories</a></li>
-                            {% endif %}
-                            <li><a href="{{ url_for('logout') }}">Log Out</a></li>
-                        {% else %}
-                            <li><a href="{{ url_for('login') }}">Log In</a></li>
-                            <li><a href="{{ url_for('register') }}">Register</a></li>
-                        {% endif %}
-                    </ul>
-                </div>-->
+                  </div>                  
                 <div class="col-10 offset-2">
                     <div class="container-fluid p-0">
                     <header class="row">

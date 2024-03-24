@@ -8,6 +8,31 @@ function activate() {
     this.classList.add("active")
 }
 
+function navResizer() {
+    if ($(window).width() < 576 ) {
+        $("#navbar").width(60);
+        $("#nav-big").addClass("d-none")
+        $("#sidenav-toggler").removeClass("d-none")
+        return
+    } else if ($(window).width() < 768 ) {
+        $("#navbar").width(100);
+    } else if ($(window).width() < 992 ) {
+        $("#navbar").width(141);
+    }else if ($(window).width() < 1200 ) {
+        $("#navbar").width(160);
+    } else if ($(window).width() < 1370 ) {
+        $("#navbar").width(200);
+    } else if ($(window).width() > 1370 ) {
+        $("#navbar").width("18%");
+    }
+    $("#nav-big").removeClass("d-none")
+        $("#sidenav-toggler").addClass("d-none")
+}
+
+$(document).ready(navResizer);
+
+$(window).on("resize", navResizer);
+
 $("#sidenav-toggler").on("click", function() {
     if ($("#navbar").width() > 100 ) {
         $("#navbar").width(50);
