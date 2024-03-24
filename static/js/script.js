@@ -1,12 +1,14 @@
-const nav_links = document.getElementsByClassName("nav-link");
+const nav_links = document.getElementsByClassName("nav-link");;
 
-for (let i = 0; i < nav_links.length; i++) {
-    nav_links[i].addEventListener("click", activate);
-}
-
-function activate() {
-    this.classList.add("active")
-}
+$(document).ready(function() {
+    const currentPageURL = window.location.href.toLowerCase();
+    for (let link of nav_links) {
+        const linkID = link.id.toLowerCase();
+        if (currentPageURL.includes(linkID)) {
+            $(link).addClass("active");
+        }
+    }
+});
 
 function navResizer() {
     if ($(window).width() < 576 ) {
