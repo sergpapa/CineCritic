@@ -8,6 +8,17 @@ function activate() {
     this.classList.add("active")
 }
 
+$("#sidenav-toggler").on("click", function() {
+    if ($("#navbar").width() > 100 ) {
+        $("#navbar").width(50);
+        $("#nav-big").addClass("d-none")
+    } else {
+        $("#navbar").width(175);
+        $("#nav-big").removeClass("d-none")
+    }
+});
+
+
 // https://stackoverflow.com/questions/13643417/how-to-validate-pattern-matching-in-textarea
 // Yann Brelière
 

@@ -28,38 +28,42 @@
         <title>Cine Critic</title>
     </head>
     <body> 
-        <div class="nav-bar d-flex flex-column fixed-top flex-shrink-0 p-3 text-bez">
-            <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-decoration-none">
-              <span class="fs-4">Logo</span>
-            </a>
-            <hr>
-            <ul class="nav nav-pills flex-column mb-auto ">
-                {% if session.user %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('profile', username=session['user']) }}">Profile</a>
-                    </li>
-                    <li>
-                        <a class="nav-link active" href="{{ url_for('search') }}">Add Movie</a>
-                    </li>
-                    <li>
-                        <a class="nav-link" href="{{ url_for('movies_list') }}">Movie List</a>
-                    </li>
-                    <li>
-                        <a class="nav-link" href="{{ url_for('logout') }}">Log Out</a>
-                    </li>
-                {% else %}
-                    <li>
-                        <a class="nav-link" href="{{ url_for('login') }}">Log In</a>
-                    </li>
-                    <li>
-                        <a class="nav-link" href="{{ url_for('register') }}">Register</a>
-                    </li>
-                {% endif %}
-            </ul>
-            <hr>
-          </div>     
+           
         <div class="container-fluid">
             <div class="row">
+                <div id="navbar" class="col-3 col-md-2 nav-bar d-flex flex-column fixed-top flex-shrink-0 p-3 text-bez">
+                    <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-decoration-none">
+                      <span class="fs-4">Logo</span>
+                    </a>
+                    <hr>
+                    <div class="text-center">
+                        <button id="sidenav-toggler" type="button" class="navbar-expand"><i class="fa-solid fa-bars"></i></button>
+                    </div>
+                    <ul id="nav-big" class="nav nav-pills flex-column mb-auto ">
+                        {% if session.user %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ url_for('profile', username=session['user']) }}">Profile</a>
+                            </li>
+                            <li>
+                                <a class="nav-link active" href="{{ url_for('search') }}">Add Movie</a>
+                            </li>
+                            <li>
+                                <a class="nav-link" href="{{ url_for('movies_list') }}">Movie List</a>
+                            </li>
+                            <li>
+                                <a class="nav-link" href="{{ url_for('logout') }}">Log Out</a>
+                            </li>
+                        {% else %}
+                            <li>
+                                <a class="nav-link" href="{{ url_for('login') }}">Log In</a>
+                            </li>
+                            <li>
+                                <a class="nav-link" href="{{ url_for('register') }}">Register</a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                    <hr>
+                  </div>  
                 <!--- Old Nav
                 <div class="nav-bar col-2 fixed-top d-flex flex-column">
                     <h1 class="mt-4"><a class="m-4" href="{{ url_for('search') }}">Logo</a></h1>
