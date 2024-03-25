@@ -40,15 +40,15 @@
                         <button id="sidenav-toggler" type="button" class="navbar-expand my-2"><i class="fa-solid fa-bars"></i></button>
                     </div>
                     <ul id="nav-big" class="nav nav-pills flex-column mb-auto ">
+                        <li>
+                            <a id="movies_list" class="nav-link" href="{{ url_for('movies_list') }}">Movie List</a>
+                        </li>
+                        <li>
+                            <a id="search" class="nav-link" href="{{ url_for('search') }}">Add Movie</a>
+                        </li>                       
                         {% if session.user %}
                             <li class="nav-item">
                                 <a id="profile" class="nav-link" href="{{ url_for('profile', username=session['user']) }}">Profile</a>
-                            </li>
-                            <li>
-                                <a id="search" class="nav-link" href="{{ url_for('search') }}">Add Movie</a>
-                            </li>
-                            <li>
-                                <a id="movies_list" class="nav-link" href="{{ url_for('movies_list') }}">Movie List</a>
                             </li>
                             <li>
                                 <a id="logout" class="nav-link" href="{{ url_for('logout') }}">Log Out</a>

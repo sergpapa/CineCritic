@@ -69,6 +69,7 @@ def search():
         return redirect(url_for("search"))
     return render_template("search.html", movies_sorted=movies_sorted, movies=movies, title=title)
 
+
 ## Prifile functionality from Taskmanager Project
 @app.route("/register", methods=["GET", "POST"])
 def register():
@@ -117,14 +118,16 @@ def login():
 
 @app.route("/profile/<username>", methods=["GET", "POST"])
 def profile(username):
-    movies = list(mongo.db.movies.find())
-    reviews = list(mongo.db.reviews.find().sort({"_id": -1}))
-    username = mongo.db.users.find_one(
-        {"username": session["user"]})["username"]
-    if session["user"]:
-        return render_template("profile.html", username=username, reviews=reviews, movies=movies)
+    if session:
+        movies = list(mongo.db.movies.find())
+        reviews = list(mongo.db.reviews.find().sort({"_id": -1}))
+        username = mongo.db.users.find_one(
+            {"username": session["user"]})["username"]
+        if session["user"]:
+            return render_template("profile.html", username=username, reviews=reviews, movies=movies)
+    else:
+        return redirect(url_for("login"))
 
-    return render_template("login.html")
 
 @app.route("/logout")
 def logout():
@@ -138,36 +141,40 @@ def logout():
 def add_movie(imdbID):
     movies = list(mongo.db.movies.find())
     existing_movie = mongo.db.movies.find_one({"imdbID": imdbID})
-    if session["user"]:
-        if existing_movie:
-            flash("Movie already in database")
+    if session:
+        if session["user"]:
+            if existing_movie:
+                flash("Movie already in database")
+            else:
+                movie = requests.get("https://www.omdbapi.com/?i=" + imdbID + "&apikey=8acb1c61").json()
+                print("movie= ", movie)
+                print(type(movie))
+                movie_to_add = {
+                    "title": movie["Title"],
+                    "year": movie["Year"],
+                    "director": movie["Director"],
+                    "plot": movie["Plot"],
+                    "actors": movie["Actors"],
+                    "poster": movie["Poster"],
+                    "imdbID": movie["imdbID"],
+                    "added_by": session["user"],
+                    "reviews": 0
+                }
+                mongo.db.movies.insert_one(movie_to_add)
+                movie = mongo.db.movies.find_one({"imdbID": movie_to_add["imdbID"]})
+                flash("Movie added successfully")
+                return render_template("movie.html", movie=movie)
         else:
-            movie = requests.get("https://www.omdbapi.com/?i=" + imdbID + "&apikey=8acb1c61").json()
-            print("movie= ", movie)
-            print(type(movie))
-            movie_to_add = {
-                "title": movie["Title"],
-                "year": movie["Year"],
-                "director": movie["Director"],
-                "plot": movie["Plot"],
-                "actors": movie["Actors"],
-                "poster": movie["Poster"],
-                "imdbID": movie["imdbID"],
-                "added_by": session["user"],
-                "reviews": 0
-            }
-            mongo.db.movies.insert_one(movie_to_add)
-            movie = mongo.db.movies.find_one({"imdbID": movie_to_add["imdbID"]})
-            flash("Movie added successfully")
-            return render_template("movie.html", movie=movie)
+            flash("~ You must be logged in to add a movie ~")
+        movies = list(mongo.db.movies.find())
+        for movie in movies:
+            if movie["reviews"] == 0:
+                mongo.db.movies.delete_one(movie)
+        movies = list(mongo.db.movies.find().sort({"_id": -1}))
+        return redirect(url_for("search"))
     else:
         flash("~ You must be logged in to add a movie ~")
-    movies = list(mongo.db.movies.find())
-    for movie in movies:
-        if movie["reviews"] == 0:
-             mongo.db.movies.delete_one(movie)
-    movies = list(mongo.db.movies.find().sort({"_id": -1}))
-    return redirect(url_for("search"))
+        return redirect(url_for("search"))
 
 
 @app.route("/movie/<imdbID>")
@@ -176,88 +183,114 @@ def movie(imdbID):
     reviews = list(mongo.db.reviews.find())
     return render_template("movie.html", movie=movie, reviews=reviews)
 
+
 @app.route("/add_review/<imdbID>", methods=["GET", "POST"])
 def add_review(imdbID):
-    movie = mongo.db.movies.find_one({"imdbID": imdbID})
-    if request.method == "POST":
-        review = {
-            "review": request.form.get("add_review"),
-            "movie": movie["title"],
-            "imdbID": movie["imdbID"],
-            "added_by": session["user"],
-            "thumbs_up": 0,
-            "thumds_down": 0,
-            "rated_by": []
-        }
-        mongo.db.reviews.insert_one(review)
-        mongo.db.movies.update_one({"imdbID": imdbID}, {"$inc":  {"reviews": 1}})
-        flash("Review added successfully!")
-        return redirect(url_for("movie", imdbID=movie["imdbID"]))
-        
-    return render_template("add_review.html", movie=movie)
+    if session:
+        movie = mongo.db.movies.find_one({"imdbID": imdbID})
+        if request.method == "POST":
+            review = {
+                "review": request.form.get("add_review"),
+                "movie": movie["title"],
+                "imdbID": movie["imdbID"],
+                "added_by": session["user"],
+                "thumbs_up": 0,
+                "thumds_down": 0,
+                "rated_by": []
+            }
+            mongo.db.reviews.insert_one(review)
+            mongo.db.movies.update_one({"imdbID": imdbID}, {"$inc":  {"reviews": 1}})
+            flash("Review added successfully!")
+            return redirect(url_for("movie", imdbID=movie["imdbID"]))
+            
+        return render_template("add_review.html", movie=movie)
+    else:
+        flash("~ You must be logged in to add a review ~")
+        return redirect(url_for("login"))
+
 
 @app.route("/edit_review/<review_id>/<imdbID>", methods=["GET", "POST"])
 def edit_review(review_id, imdbID):
-    movie = mongo.db.movies.find_one({"imdbID": imdbID})
-    review_to_edit = mongo.db.reviews.find_one({"_id": ObjectId(review_id)})
-    if request.method == "POST":
-        review = {
-            "review": request.form.get("edit_review"),
-        }
-        mongo.db.reviews.update_one({"_id": ObjectId(review_id)}, {"$set": review})
-        flash("Review edited successfully!")
-        return redirect(url_for("movie", imdbID=movie["imdbID"]))
-        
-    return render_template("edit_review.html", movie=movie, review_to_edit=review_to_edit)
+    if session:
+        movie = mongo.db.movies.find_one({"imdbID": imdbID})
+        review_to_edit = mongo.db.reviews.find_one({"_id": ObjectId(review_id)})
+        if request.method == "POST":
+            review = {
+                "review": request.form.get("edit_review"),
+            }
+            mongo.db.reviews.update_one({"_id": ObjectId(review_id)}, {"$set": review})
+            flash("Review edited successfully!")
+            return redirect(url_for("movie", imdbID=movie["imdbID"]))
+            
+        return render_template("edit_review.html", movie=movie, review_to_edit=review_to_edit)
+    else:
+        flash("~ You must be logged in to edit a review ~")
+        return redirect(url_for("login"))
+
 
 @app.route("/delete_review/<review_id>/<imdbID>")
 def delete_review(imdbID, review_id):
-    mongo.db.reviews.delete_one({"_id": ObjectId(review_id)})
-    mongo.db.movies.update_one({"imdbID": imdbID}, {"$inc":  {"reviews": -1}})
-    flash("Review successfully deleted")
-    return redirect(url_for("movie", imdbID=imdbID))
+    if session:
+        mongo.db.reviews.delete_one({"_id": ObjectId(review_id)})
+        mongo.db.movies.update_one({"imdbID": imdbID}, {"$inc":  {"reviews": -1}})
+        flash("Review successfully deleted")
+        return redirect(url_for("movie", imdbID=imdbID))
+    else:
+        flash("~ You must be logged in to delete a review ~")
+        return redirect(url_for("login"))
+
 
 @app.route("/like_review/<review_id>/<imdbID>")
 def like_review(imdbID, review_id):
-    movie = mongo.db.movies.find_one({"imdbID": imdbID})
-    review_to_rate = mongo.db.reviews.find_one({"_id": ObjectId(review_id)})
+    if session:
+        movie = mongo.db.movies.find_one({"imdbID": imdbID})
+        review_to_rate = mongo.db.reviews.find_one({"_id": ObjectId(review_id)})
 
-    thumbs_up = {
-        "thumbs_up": 1
-    }
+        thumbs_up = {
+            "thumbs_up": 1
+        }
 
-    like = {
-        "rated_by": session["user"]
-    }
+        like = {
+            "rated_by": session["user"]
+        }
 
-    if session["user"] not in review_to_rate["rated_by"]:
-        mongo.db.reviews.update_one({"_id": ObjectId(review_id)}, {"$inc":  thumbs_up})
-        mongo.db.reviews.update_one({"_id": ObjectId(review_id)}, {"$push":  like})
-        return redirect(url_for("movie", imdbID=imdbID, review_to_rate=review_to_rate, movie=movie))
+        if session["user"] not in review_to_rate["rated_by"]:
+            mongo.db.reviews.update_one({"_id": ObjectId(review_id)}, {"$inc":  thumbs_up})
+            mongo.db.reviews.update_one({"_id": ObjectId(review_id)}, {"$push":  like})
+            return redirect(url_for("movie", imdbID=imdbID, review_to_rate=review_to_rate, movie=movie))
+        else:
+            flash("You already rated this review")
+            return redirect(url_for("movie", imdbID=imdbID, review_to_edit=review_to_edit, movie=movie))
     else:
-        flash("You already rated this review")
-        return redirect(url_for("movie", imdbID=imdbID, review_to_edit=review_to_edit, movie=movie))
+        flash("~ You must be logged in to rate a review ~")
+        return redirect(url_for("login"))
+
 
 @app.route("/dislike_review/<review_id>/<imdbID>")
 def dislike_review(imdbID, review_id):
-    movie = mongo.db.movies.find_one({"imdbID": imdbID})
-    review_to_rate = mongo.db.reviews.find_one({"_id": ObjectId(review_id)})
+    if session:
+        movie = mongo.db.movies.find_one({"imdbID": imdbID})
+        review_to_rate = mongo.db.reviews.find_one({"_id": ObjectId(review_id)})
 
-    thumbs_down = {
-        "thumbs_down": 1
-    }
+        thumbs_down = {
+            "thumbs_down": 1
+        }
 
-    dislike = {
-        "rated_by": session["user"]
-    }
+        dislike = {
+            "rated_by": session["user"]
+        }
 
-    if session["user"] not in review_to_rate["rated_by"]:
-        mongo.db.reviews.update_one({"_id": ObjectId(review_id)}, {"$inc":  thumbs_down})
-        mongo.db.reviews.update_one({"_id": ObjectId(review_id)}, {"$push":  dislike})
-        return redirect(url_for("movie", imdbID=imdbID, review_to_rate=review_to_rate, movie=movie))
+        if session["user"] not in review_to_rate["rated_by"]:
+            mongo.db.reviews.update_one({"_id": ObjectId(review_id)}, {"$inc":  thumbs_down})
+            mongo.db.reviews.update_one({"_id": ObjectId(review_id)}, {"$push":  dislike})
+            return redirect(url_for("movie", imdbID=imdbID, review_to_rate=review_to_rate, movie=movie))
+        else:
+            flash("You already rated this review")
+            return redirect(url_for("movie", imdbID=imdbID, review_to_edit=review_to_edit, movie=movie))
     else:
-        flash("You already rated this review")
-        return redirect(url_for("movie", imdbID=imdbID, review_to_edit=review_to_edit, movie=movie))
+        flash("~ You must be logged in to rate a review ~")
+        return redirect(url_for("login"))
+
 
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
