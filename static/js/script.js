@@ -2,15 +2,18 @@ const nav_links = document.getElementsByClassName("nav-link");;
 
 $(document).ready(function() {
     const currentPageURL = window.location.href.toLowerCase();
+    let home_page = true
     for (let link of nav_links) {
         const linkID = link.id.toLowerCase();
         if (currentPageURL.includes(linkID)) {
             $(link).addClass("active");
+            home_page = false
         } else if (currentPageURL.includes("movie") || currentPageURL.includes("review") ) {
             $("#movies_list").addClass("active");
-        } else {
-            $("#movies_list").addClass("active");
         }
+    }
+    if (home_page) {
+        $("#movies_list").addClass("active");
     }
 });
 
