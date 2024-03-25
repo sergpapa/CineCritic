@@ -80,7 +80,7 @@
                                                             <p class="mb-0">{{ review.review }}</p>
                                                             <small><strong>By {{ review.added_by }}</strong></small>
                                                             {% if session["user"] %}
-                                                                {% if session["user"] == review.added_by %}
+                                                                {% if session["user"] == review.added_by or session["user"] == "admin" %}
                                                                     <div class="mx-auto">
                                                                         <a class="btn btn-small btn-brown" href="{{ url_for('edit_review', review_id=review._id, imdbID=movie.imdbID)  }}">Edit</a> 
                                                                         <a class="btn btn-small btn-dark-brown" data-toggle="modal" data-target="#id{{ review._id }}">Delete</a>
