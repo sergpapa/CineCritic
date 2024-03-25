@@ -25,7 +25,7 @@ function navResizer() {
     } else if ($(window).width() < 1370 ) {
         $("#navbar").width(200);
     } else if ($(window).width() > 1370 ) {
-        $("#navbar").width("16%");
+        $("#navbar").width("15%");
     }
     $("#nav-big").removeClass("d-none")
         $("#sidenav-toggler").addClass("d-none")
