@@ -218,9 +218,18 @@ footer {
         height: 500px;
         max-height: 600px;
     }
+
+    .margin-sm {
+        margin-left: 1.5em;
+    }
 }
-@media only screen and (max-width: 992px) {
+@media only screen and (max-width: 576px) {
     .input {
         width: 80%;
     }
+
+    .poster {
+        width: 200px;
+    }
+    
 }
