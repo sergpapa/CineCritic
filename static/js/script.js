@@ -6,6 +6,8 @@ $(document).ready(function() {
         const linkID = link.id.toLowerCase();
         if (currentPageURL.includes(linkID)) {
             $(link).addClass("active");
+        } else if (currentPageURL.includes("movie") || currentPageURL.includes("review") ) {
+            $("#movies_list").addClass("active");
         }
     }
 });
