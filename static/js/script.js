@@ -1,4 +1,4 @@
-const nav_links = document.getElementsByClassName("nav-link");;
+const nav_links = document.getElementsByClassName("nav-link");
 
 $(document).ready(function() {
     const currentPageURL = window.location.href.toLowerCase();
@@ -17,8 +17,15 @@ $(document).ready(function() {
     }
 });
 
+
 function navResizer() {
-    if ($(window).width() < 576 ) {
+    if($(window).width() < 400){
+        $("#navbar").width(40);
+        $("#nav-big").addClass("d-none")
+        $("#sidenav-toggler").removeClass("d-none")
+        $("#logo").width(50);
+        return
+    } else if ($(window).width() < 576 ) {
         $("#navbar").width(60);
         $("#nav-big").addClass("d-none")
         $("#sidenav-toggler").removeClass("d-none")

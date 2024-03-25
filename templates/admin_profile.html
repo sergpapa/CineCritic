@@ -10,7 +10,7 @@
                 </div>
                 <div class="row">
                     <div class="col text-left ml-4">
-                        <h4>all reviews</h4>
+                        <h4>All reviews</h4>
                         <hr/>
                     </div>
                 </div>
@@ -19,16 +19,16 @@
                         <div class="col">
                             <div class="container">
                                 <div class="row  review-list-item">
-                                    <div class="col-6 col-md-3">
+                                    <div class="col-12 col-sm-6 col-md-3">
                                         <p class="text-left ml-4 pt-4"><strong>{{ review.movie }}</strong></p>
                                     </div>
-                                    <div class="col-5 col-md-4 text-left pt-4">
+                                    <div class="col-10 col-sm-5 col-md-4 text-left ml-4 ml-sm-0 pt-4">
                                         <p class="review-list-details">{{ review.review }}</p>
                                     </div>
-                                    <div class="col-2 col-md-1 text-left pt-4">
+                                    <div class="col-12 col-sm-2 col-md-1 text-left pt-4">
                                         <p class="ml-4 text-center"><strong>{{ review.added_by }}</strong></p>
                                     </div>
-                                    <div class="col-10 col-lg-4">
+                                    <div class="col-12 col-sm-10 col-lg-4">
                                         <div class="mx-auto">
                                             <a class="btn btn-small btn-brown" href="{{ url_for('movie', imdbID=review.imdbID) }}">Go to movie Card</a> 
                                         </div>
