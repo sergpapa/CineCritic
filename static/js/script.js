@@ -8,6 +8,8 @@ $(document).ready(function() {
             $(link).addClass("active");
         } else if (currentPageURL.includes("movie") || currentPageURL.includes("review") ) {
             $("#movies_list").addClass("active");
+        } else {
+            $("#movies_list").addClass("active");
         }
     }
 });
@@ -17,13 +19,17 @@ function navResizer() {
         $("#navbar").width(60);
         $("#nav-big").addClass("d-none")
         $("#sidenav-toggler").removeClass("d-none")
+        $("#logo").width(70);
         return
     } else if ($(window).width() < 768 ) {
         $("#navbar").width(100);
+        $("#logo").width(90);
     } else if ($(window).width() < 992 ) {
         $("#navbar").width(141);
+        $("#logo").width(130);
     }else if ($(window).width() < 1200 ) {
         $("#navbar").width(160);
+        $("#logo").width(170);
     } else if ($(window).width() < 1370 ) {
         $("#navbar").width(200);
     } else if ($(window).width() > 1370 ) {
@@ -39,11 +45,13 @@ $(window).on("resize", navResizer);
 
 $("#sidenav-toggler").on("click", function() {
     if ($("#navbar").width() > 100 ) {
-        $("#navbar").width(50);
+        $("#navbar").width(60);
         $("#nav-big").addClass("d-none")
+        $("#logo").width(70);
     } else {
         $("#navbar").width(175);
         $("#nav-big").removeClass("d-none")
+        $("#logo").width(170);
     }
 });
 

@@ -19,6 +19,12 @@ small {
     box-shadow: 3px 4px 10px -2px rgba(0, 0, 0, .2);
 }
 
+.logo {
+    position: relative;
+    width: 200px;
+    height: auto;
+}
+
 
 .navbar-expand {
     width: 40px;

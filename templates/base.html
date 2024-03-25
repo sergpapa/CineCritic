@@ -21,6 +21,9 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
 
+        <!--  favicon -->
+        <link rel="icon" href="{{ url_for('static', filename='images/cine-critic-favicon.svg') }}"/>
+
         <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" type="text/css">
 
         <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -32,8 +35,8 @@
         <div class="container-fluid">
             <div class="row">
                 <div id="navbar" class="col-3 col-md-2 nav-bar d-flex flex-column fixed-top flex-shrink-0 p-3 text-bez">
-                    <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-decoration-none">
-                      <span class="fs-4">Logo</span>
+                    <a href="/" class="d-flex align-items-center mx-auto mb-3 mb-md-0 me-md-auto text-decoration-none">
+                      <span class="fs-4"><img id="logo" class="logo" src="{{ url_for('static', filename='images/cine-critic-logo.svg') }}" alt="cine critic logo"></span>
                     </a>
                     <hr>
                     <div class="text-center">
