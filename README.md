@@ -189,7 +189,7 @@ This website is deployed on GitHub pages. Follow these steps to deploy a project
   3. In **Source**, select the **main** branch and click **save**.
   4. After selecting the master branch, the page will automatically reload, displaying a ribbon indicating the successful deployment.
 
-![GitHub-deployment](assets/images/for-readme/github-deply.png)
+![GitHub-deployment](static/images/readme/github-deply.png)
 
   You can access the live link to the GitHub deployed version - [https://sergpapa.github.io/FPC/](https://sergpapa.github.io/FPC/)
 
@@ -200,7 +200,7 @@ To create a duplicate of the GitHub Repository, known as forking, you can view a
 1. Log in on **GitHub** and find the [repository](https://github.com/sergpapa/Art-match).
 2. On the right-hand side of your page, next to the repository name, you can find a **Fork** button. Click it to create a duplicate of the original repository in your GitHub account.
 
-![GitHub-forking](assets/images/for-readme/github-fork.png)
+![GitHub-forking](static/images/readme/github-fork.png)
 
 ### **Creating a Local Clone of this Project**
 
@@ -209,7 +209,7 @@ To clone this project from GitHub to your local environment, follow these steps:
 1. Below the repository's name, click on the **Code** tab.
 2. Under **Clone with HTTPS**, click on the clipboard icon to copy the URL.
 
-![Cloning](assets/images/for-readme/github-clone.png)
+![Cloning](static/images/readme/github-clone.png)
 
 3. In your prefered IDE, open **Git Bash**.
 4. Change the current working directory to the location where you want to create the cloned directory.
