@@ -9,6 +9,27 @@ CineCritic is a profile based movie review web application dedicated to movie en
 ![CineCritic mockup](static/images/readme/cine-critic-mockup.png)
 
 # **Contents**
+
+- [**CineCritic - The house of tasteful cinema critique!**](#cinecritic---the-house-of-tasteful-cinema-critique)
+    - [**Introduction**](#introduction)
+- [**Contents**](#contents)
+- [**User Experience (UX)**](#user-experience-ux)
+    - [**User Stories**](#user-stories)
+    - [**Wireframes**](#wireframes)
+    - [**Site Structure**](#site-structure)
+  - [**Design**](#design)
+- [**Features**](#features)
+  - [**Existing features**](#existing-features)
+  - [**Future Features**](#future-features)
+- [**Technologies Used**](#technologies-used)
+- [**Testing**](#testing)
+- [**Deployment**](#deployment)
+    - [**Project Deployment Instructions**](#project-deployment-instructions)
+    - [**Forking the Repository on GitHub**](#forking-the-repository-on-github)
+    - [**Creating a Local Clone of this Project**](#creating-a-local-clone-of-this-project)
+- [**Credits**](#credits)
+- [**Acknowledgements**](#acknowledgements)
+
   
 
 # **User Experience (UX)**
@@ -107,107 +128,53 @@ All text on the website is using a variation of the "Mulish" font family found o
 
 The color pallete chosen for the website consists of four main colors: Bone, Liver Chestnut (Horses), White Coffee and Platinum. All colors are solf and pale to profide for a calming, elegant and welcoming experience.
 
-![ArtMatch - Colour Pallete](static/images/readme/color-palette.png)
+![CinCritic - Colour Pallete](static/images/readme/color-palette.png)
 
 [Back to top](<#contents>)
 
 # **Features**
 
-The ArtMatch wesite is designed to be simple to navigate and easy to use. It includes a variety of features commonly found in most web games such as a navigation bar, gameplay mechanics and a leaderboard.
+The CineCritic wesite is designed to be simple to navigate and easy to use. It includes a variety of features to support a profile based experience, CRUD functionality for reviews and extenral API requests to a movie database.
 
 ## **Existing features**
 
 - ### **Navigation Menu**
 
-    Can be found on the header of all pages of the website pages below the logo. Makes navigation through pages easy and intuitive.
-    The navigation menu is fully responsive to accomodate users of all decvces. The active page is always overlined. Any other manu item is overlined and turned to lavender pink when hovered over with the mouse to increase usability.
+    Can be found on the side of all pages of the website pages below the logo. Makes navigation through pages easy and intuitive.
+    The navigation menu is fully responsive to accomodate users of all decvces. The active page is always highlighted. All other menu items are changing color when hovered over to increase usability.
 
   - *Navigation Menu*
 
-    ![Navigation Menu](assets/images/for-readme/navigation-menu.png)
+    ![Navigation Menu]()
 
-- ### **Gameplay Features:**
-
-  - *Level Building*
-
-    The game is designed with multiple levels (5), increasing in difficulty every two levels. The number of cards in each level varies, and the layout adapts to the screen size. Levels progress as the player successfully completes the current level.
-
-    ![level building](assets/images/for-readme/start-game.png)
-
-  - *Card Load and Pairing*
-
-    The game dynamically loads cards with artworks from a database. Each card is paired with another, and the player's goal is to match these pairs by clicking on them.
-
-    ![Card Load and Pairing](assets/images/for-readme/flip-cards.png)
-
-  - *Level Progression*
-
-    Upon successfully matching all card pairs in a level, the player advances to the next level. The game adapts the grid layout and increases the difficulty with more cards as the levels progress.
-
-    ![Level Progression](assets/images/for-readme/level.png)
-
-  - *Score Keeping*
-  
-    The player's score is continuously updated based on successful matches. Each correct pair earns the player points, contributing to their overall score.
-
-    ![Score Keeping](assets/images/for-readme/score.png)
-
-  - *Lives Tracking*
-  
-    The player starts with a set number of lives. Incorrect matches result in the deduction of a life. When lives reach zero, the game ends.
-
-    ![Lives Tracking](assets/images/for-readme/lives.png)
-
-  - *Live Updates*
-
-    The player receives real-time updates on their score, the current level, and the number of lives remaining. Messages appear at significant events, such as completing a level or losing a life.
-
-    ![Live Updates](assets/images/for-readme/find-pair.png)
-
-- ### **Rules**
-  
-  The website includes a dedicated page explaining the rules and interactions of the game.
-
-  ![rules-page](assets/images/for-readme/rules.png)
-  
-- ### **Leaderboard**
-  
-  Players are able to log in their desired username and store their scores in their browser memory, invoking  the motive for a user to compete and surpass their previous achievements.
-
-  ![leaderboard](assets/images/for-readme/leaderboard.png)
-  
-- ### **Sound Toggle**
-
-  The game includes a sound toggler allowing players to mute or unmute the in-game sounds. This feature enhances the player's experience by providing control over the audio elements.
-
-  ![Sound Toggler](assets/images/for-readme/sound-toggler.png)
 
 [Back to top](<#contents>)
 
 ## **Future Features**
 
-- Implementing the public API of the [Art Institute of Chicago](https://api.artic.edu/docs/) and laod a random art piece each time.
-  - This feature was initially intended to be part of the game,but due to long waiting times for the requests to be fulfilled, the feature was left for a future update.
-- Universal Leaderboard.
-  - At the moment, sicne the game is not connected to a database, the leaderboard functinality is limited to storing scores in the browser memory. Each player can access previous scores if logged in from the same decvce, but players are not able to see other users' scores yet.
-  
+
 [Back to top](<#contents>)
 
 # **Technologies Used**
 
-- [HTML5](https://html.spec.whatwg.org) - content and structure of the website
+- [Python](https://www.python.org) - backend
+- [Flask](https://flask.palletsprojects.com/en/3.0.x/) - templating framework
+- [MongoBD](https://www.mongodb.com) - database
+- [HTML5](https://html.spec.whatwg.org) - content and structure of the website via templating
 - [CSS3](https://www.w3.org/Style/CSS/Overview.en.html) - styling
-- [JavaScript](https://www.w3schools.com/js/) - functionality
-- [Balsamiq](https://balsamiq.com) - wireframes
-- [GitHub](https://github.com) - Hosting and storing
-- [Codeanywhere](https://codeanywhere.com) - coding workspace
+- [JavaScript](https://www.w3schools.com/js/) - browser functionality
+- [OMDB](https://www.omdbapi.com) -  movie db extrenal API
+- [Wireframe.cc](https://wireframe.ccm) - wireframes
+- [GitHub](https://github.com) - hosting and storing
+- [Heroku](https://wireframe.cc) - deployment
+- [Gitpod](https://gitpod.io/) - coding workspace
 - [GIMP](https://www.gimp.org) - image editing
   
 [Back to top](<#contents>)
 
 # **Testing**
 
-Please follow this [link](./TESTING.md) to learn more about testing FPC.
+Please follow this [link](./TESTING.md) to learn more about testing CineCritic.
 
 [Back to top](<#contents>)
 
@@ -255,22 +222,18 @@ To clone this project from GitHub to your local environment, follow these steps:
 
 - Font: [Google Fonts](https://fonts.google.com)
 - Icons: [Fontawesome](https://fontawesome.com)
-- Images [Art Institute of Chicago](https://www.artic.edu)
+- Movie DB: [OMDB](https://www.omdbapi.com)
 - Logo: [LOGO](https://logo.com)
-- Wireframes: [Balsamiq](https://balsamiq.com)
-- Flip cards: [w3schools](https://www.w3schools.com)
-- Shuffle: [Stack Overflow](https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array)
-- Tables: [Dev.to](https://dev.to/dcodeyt/creating-beautiful-html-tables-with-css-428l)
-- Remove element slow: [Stack Overflow](https://stackoverflow.com/questions/1807187/how-to-remove-an-element-slowly-with-jquery)
+- Wireframes: [Wireframe.cc](https://wireframe.cc)
 - Image Editing: [GIMP 2.10.34](https://www.gimp.org)
 - Color Palette: [Coolors](https://coolors.co)
-- Music: [Pixabay - Coma Media](https://pixabay.com/music/), [Free SFX](https://freesfx.co.uk/Default.aspx)
+
 
 [Back to top](<#contents>)
 
 # **Acknowledgements**
 
-This website was developed as a part of my Portfolio 2 Project for the Web Application Developemnt Diploma at the [Code Institute](https://codeinstitute.net/). I want to express my gratitude to my mentor, [Precious Ijege](https://www.linkedin.com/in/precious-ijege-908a00168/), as well as the Slack community and everyone at the Code Institute for their valuable assistance and support throughout this project.
+This website was developed as a part of my Portfolio 3 Project for the Web Application Developemnt Diploma at the [Code Institute](https://codeinstitute.net/). I want to express my gratitude to my mentor, [Precious Ijege](https://www.linkedin.com/in/precious-ijege-908a00168/), as well as the Slack community and everyone at the Code Institute for their valuable assistance and support throughout this project.
 
 Sergios Papastergiou
-2023
+2024
