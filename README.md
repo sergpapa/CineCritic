@@ -90,7 +90,10 @@ The wireframes for ArtMatch were produced in [Balsamiq](https://balsamiq.com). I
 
 ## **Site Structure**
 
-The site consists of three pages with the main landing page being the [home page](https://sergpapa.github.io/Art-match/) where the user can play the game. Additionaly, there are the [rules page](https://sergpapa.github.io/Art-match/rules.html) and [board page](https://sergpapa.github.io/Art-match/board.html).
+The site consists of 7 main pages (plus a [404](https://cine-critic-0310d8ee3de7.herokuapp.com/404) error page) with the main landing page being the [movies_list](https://cine-critic-0310d8ee3de7.herokuapp.com) where registered and unregistered users can see a list of the movies being reviewed in the app. The user can either click on a movie to see details about the movie and reviews written by other users in the movie_card page, or they can use the navigation links on the side to [login](https://cine-critic-0310d8ee3de7.herokuapp.com/login) or [register](https://cine-critic-0310d8ee3de7.herokuapp.com/register).
+Once logged in, a user can now access more pages, such as the [add_movie](https://cine-critic-0310d8ee3de7.herokuapp.com/search) page, where they can add a new movie to review by requesting the movie from the [OMDB](https://www.omdbapi.com) API to review. Additionally, a user can visit their profile page, where they can see all their reviews, visit specific movie cards and edit their reviews or delete them.
+
+Some pages are not linked since they require specific permissions or are subject to constant change.
 
 [Back to top](<#contents>)
 
@@ -98,13 +101,13 @@ The site consists of three pages with the main landing page being the [home page
 
 - *Typography*
 
-All text on the website is using a variation of the "Amatic SC" font family found on [Google Fonts - Amatic SC](https://fonts.google.com/?query=Amatic+SC)
+All text on the website is using a variation of the "Mulish" font family found on [Google Fonts - Mulish](https://fonts.google.com/specimen/Mulish)
 
 - *Colour palette*
 
-The color pallete chosen for the website consists of five colors: state grey, lavender pink, pink, misty rose and alabaster.The website is mainly colored with a soothing misty rose background, complemented by playful lavender pink for buttons and messages and pink color for the game cards. State grey provides balanced borders and text, while alabaster adds modern sophistication to details and shapes. This carefully chosen color palette aims to create a visually pleasing and cohesive user interface for an enhanced gaming experience.
+The color pallete chosen for the website consists of four main colors: Bone, Liver Chestnut (Horses), White Coffee and Platinum. All colors are solf and pale to profide for a calming, elegant and welcoming experience.
 
-![ArtMatch - Colour Pallete](assets/images/for-readme/color-pallete.png)
+![ArtMatch - Colour Pallete](static/images/readme/color-palette.png)
 
 [Back to top](<#contents>)
 

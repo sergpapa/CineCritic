@@ -45,11 +45,11 @@
                     <ul id="nav-big" class="nav nav-pills flex-column mb-auto ">
                         <li>
                             <a id="movies_list" class="nav-link" href="{{ url_for('movies_list') }}">Movie List</a>
-                        </li>
-                        <li>
-                            <a id="search" class="nav-link" href="{{ url_for('search') }}">Add Movie</a>
-                        </li>                       
+                        </li>                    
                         {% if session.user %}
+                            <li>
+                                <a id="search" class="nav-link" href="{{ url_for('search') }}">Add Movie</a>
+                            </li>   
                             <li class="nav-item">
                                 <a id="profile" class="nav-link" href="{{ url_for('profile', username=session['user']) }}">Profile</a>
                             </li>
