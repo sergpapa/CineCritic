@@ -26,17 +26,34 @@ The ArtMatch website has been tested manually as well as with automated services
 
 ### *[w3schools HTML Validator](https://validator.w3.org)*
 
-- [Home page](https://sergpapa.github.io/Art-match/)
+- [Movie List](https://cine-critic-0310d8ee3de7.herokuapp.com/movies_list)
   
-  ![Home-page-validator](assets/images/for-testing/home-page-html-validator.png)
+  ![Movie List HTML validator](static/images/testing/html-movie-list.png)
 
-- [Rules page](https://sergpapa.github.io/Art-match/rules.html)
+- [Login](https://cine-critic-0310d8ee3de7.herokuapp.com/login)
   
-  ![Rules-page-validator](assets/images/for-testing/rules-page-html-validator.png)
+  ![Login HTML validator](static/images/testing/login-validator.png)
 
-- [Board page](https://sergpapa.github.io/Art-match/board.html)
+- [Register](https://cine-critic-0310d8ee3de7.herokuapp.com/register)
   
-  ![Board-page-validator](assets/images/for-testing/board-page-html-validator.png)
+  ![Resgister List HTML validator](static/images/testing/register-validator.png)
+
+- [Add Movie](https://cine-critic-0310d8ee3de7.herokuapp.com/search)
+  
+  ![Add Movie HTML validator](static/images/testing/add-movie-validator.png)
+
+- [Profile](https://cine-critic-0310d8ee3de7.herokuapp.com/profile/tester)
+  
+  ![Profile Validator](static/images/testing/profile-validator.png)
+
+- [Add Review](https://cine-critic-0310d8ee3de7.herokuapp.com/add_review/tt0120737)
+  
+  ![Add Review](static/images/testing/add-review-validator.png)
+
+- [Edit Review](https://cine-critic-0310d8ee3de7.herokuapp.com/edit_review/6607f85df54e75a19e892533/tt0120737)
+  
+  ![Edit Review](static/images/testing/edit-review-validator.png)
+
 
 ### *[w3schools CSS Validator](https://jigsaw.w3.org/css-validator/)*
 
