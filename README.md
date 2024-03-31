@@ -20,7 +20,6 @@ CineCritic is a profile based movie review web application dedicated to movie en
   - [**Design**](#design)
 - [**Features**](#features)
   - [**Existing features**](#existing-features)
-  - [**Future Features**](#future-features)
 - [**Technologies Used**](#technologies-used)
 - [**Testing**](#testing)
 - [**Deployment**](#deployment)
