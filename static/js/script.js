@@ -2,12 +2,12 @@ const nav_links = document.getElementsByClassName("nav-link");
 
 $(document).ready(function() {
     const currentPageURL = window.location.href.toLowerCase();
-    let home_page = true
+    let home_page = true;
     for (let link of nav_links) {
         const linkID = link.id.toLowerCase();
         if (currentPageURL.includes(linkID)) {
             $(link).addClass("active");
-            home_page = false
+            home_page = false;
         } else if (currentPageURL.includes("movie") || currentPageURL.includes("review") ) {
             $("#movies_list").addClass("active");
         }
@@ -21,16 +21,16 @@ $(document).ready(function() {
 function navResizer() {
     if($(window).width() < 400){
         $("#navbar").width(40);
-        $("#nav-big").addClass("d-none")
-        $("#sidenav-toggler").removeClass("d-none")
+        $("#nav-big").addClass("d-none");
+        $("#sidenav-toggler").removeClass("d-none");
         $("#logo").width(50);
-        return
+        return;
     } else if ($(window).width() < 576 ) {
         $("#navbar").width(60);
-        $("#nav-big").addClass("d-none")
-        $("#sidenav-toggler").removeClass("d-none")
+        $("#nav-big").addClass("d-none");
+        $("#sidenav-toggler").removeClass("d-none");
         $("#logo").width(70);
-        return
+        return;
     } else if ($(window).width() < 768 ) {
         $("#navbar").width(100);
         $("#logo").width(90);
@@ -45,8 +45,8 @@ function navResizer() {
     } else if ($(window).width() > 1370 ) {
         $("#navbar").width("15%");
     }
-    $("#nav-big").removeClass("d-none")
-        $("#sidenav-toggler").addClass("d-none")
+    $("#nav-big").removeClass("d-none");
+        $("#sidenav-toggler").addClass("d-none");
 }
 
 $(document).ready(navResizer);
@@ -56,16 +56,14 @@ $(window).on("resize", navResizer);
 $("#sidenav-toggler").on("click", function() {
     if ($("#navbar").width() > 100 ) {
         $("#navbar").width(60);
-        $("#nav-big").addClass("d-none")
+        $("#nav-big").addClass("d-none");
         $("#logo").width(70);
     } else {
         $("#navbar").width(175);
-        $("#nav-big").removeClass("d-none")
+        $("#nav-big").removeClass("d-none");
         $("#logo").width(170);
     }
 });
-
-
 
 // https://stackoverflow.com/questions/13643417/how-to-validate-pattern-matching-in-textarea
 // Yann Brelière

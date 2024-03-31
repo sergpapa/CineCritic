@@ -61,7 +61,7 @@ The ArtMatch website has been tested manually as well as with automated services
 
 ### *[JsHint JavasScript Validator](https://jshint.com)*
 
-![js-validator](assets/images/for-testing/js-validator.png)
+![js-validator](static/images/testing/js-validator.png)
 
 [Back to top](#contents)
 
