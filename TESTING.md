@@ -57,7 +57,7 @@ The ArtMatch website has been tested manually as well as with automated services
 
 ### *[w3schools CSS Validator](https://jigsaw.w3.org/css-validator/)*
 
-![css-validator](assets/images/for-testing/css-validator.png)
+![css-validator](static/images/testing/css-validation.png)
 
 ### *[JsHint JavasScript Validator](https://jshint.com)*
 
