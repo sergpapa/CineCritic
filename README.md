@@ -212,7 +212,7 @@ The CineCritic wesite is designed to be simple to navigate and easy to use. It i
 
         - *Search and Add Movie*
 
-            ![Search and Add Movie]()
+            ![Search and Add Movie](static/images/readme/search.png)
     
     - **Review Functionality**
 
@@ -220,7 +220,7 @@ The CineCritic wesite is designed to be simple to navigate and easy to use. It i
 
         - *Review a Movie*
 
-            ![Review a Movie]()
+            ![Review a Movie](static/images/readme/add-review.png)
     
     - **User Review Management**
 
@@ -232,7 +232,7 @@ The CineCritic wesite is designed to be simple to navigate and easy to use. It i
 
         - *Review a Movie*
 
-            ![Review a Movie]()
+            ![Review a Movie](static/images/readme/edit-review.png)
 
 
 [Back to top](<#contents>)
