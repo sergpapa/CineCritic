@@ -309,6 +309,8 @@ To clone this project from GitHub to your local environment, follow these steps:
 - Wireframes: [Wireframe.cc](https://wireframe.cc)
 - Image Editing: [GIMP 2.10.34](https://www.gimp.org)
 - Color Palette: [Coolors](https://coolors.co)
+- GeeksForGeeks: [geeksforgeeks](https://www.geeksforgeeks.org/python-404-error-handling-in-flask/)
+- StackOverflow: [Yann Dìnendal](https://stackoverflow.com/questions/13643417/how-to-validate-pattern-matching-in-textarea)
 
 
 [Back to top](<#contents>)
