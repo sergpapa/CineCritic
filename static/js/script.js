@@ -1,9 +1,3 @@
-document.addEventListener("DOMContentLoaded", function() {
-    var lazyLoadInstance = new LazyLoad({
-        elements_selector: ".lazyload"
-    });
-});
-
 const nav_links = document.getElementsByClassName("nav-link");
 
 $(document).ready(function() {
