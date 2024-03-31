@@ -145,7 +145,7 @@ The CineCritic wesite is designed to be simple to navigate and easy to use. It i
 
     - *Navigation Menu*
 
-        ![Navigation Menu]()
+        ![Navigation Menu](static/images/readme/nav.png)
 
 - ### **User Profiles**
 
@@ -153,11 +153,11 @@ The CineCritic wesite is designed to be simple to navigate and easy to use. It i
 
     - *login*
 
-        ![Login]()
+        ![Login](static/images/readme/login.png)
 
     - *Register*
 
-        ![Register]()
+        ![Register](static/images/readme/register.png)
     
     - *Admin User*
 
@@ -165,7 +165,7 @@ The CineCritic wesite is designed to be simple to navigate and easy to use. It i
 
         - *Admin*
 
-            ![Admin]()
+            ![Admin](static/images/readme/admin.png)
     
     - *Profile Page*
 
@@ -179,7 +179,7 @@ The CineCritic wesite is designed to be simple to navigate and easy to use. It i
         
         - *Profile Page*
 
-            ![Profile Page]()
+            ![Profile Page](static/images/readme/admin.png)
 
 - ### **Movie Card**
 
@@ -187,7 +187,8 @@ The CineCritic wesite is designed to be simple to navigate and easy to use. It i
 
     - *Movie Card*
 
-        ![Movie Card]() 
+        ![Movie Card-movie](static/images/readme/movie-card.png) 
+        ![Movie Card-reviews](static/images/readme/movie-card1.png) 
 
 - ### **Header and Footer**
 
@@ -195,9 +196,13 @@ The CineCritic wesite is designed to be simple to navigate and easy to use. It i
 
         The header section of the website contains the name and slogan, providing users with a quick and clear identification of the website. This minimalistic design approach ensures that the header remains uncluttered and focused on conveying the core identity of the platform.
     
+    ![Header](static/images/readme/header.png)
+    
     - *Footer*
 
         The footer section of the website displays credits, acknowledging the contributors and creators of the platform. This section serves as a gesture of appreciation towards those who have contributed to the development and maintenance of the website.
+    
+    ![Footer](static/images/readme/footer.png)
 
 
 - ### Reviewing A Movie**
