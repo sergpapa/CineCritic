@@ -1,3 +1,9 @@
+document.addEventListener("DOMContentLoaded", function() {
+    var lazyLoadInstance = new LazyLoad({
+        elements_selector: ".lazyload"
+    });
+});
+
 const nav_links = document.getElementsByClassName("nav-link");
 
 $(document).ready(function() {
@@ -64,6 +70,7 @@ $("#sidenav-toggler").on("click", function() {
         $("#logo").width(170);
     }
 });
+
 
 
 // https://stackoverflow.com/questions/13643417/how-to-validate-pattern-matching-in-textarea
