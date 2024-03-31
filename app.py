@@ -12,11 +12,14 @@ if os.path.exists("env.py"):
 
 app = Flask(__name__)
 
+
 app.config["MONGO_DBNAME"] = os.environ.get("MONGO_DBNAME")
 app.config["MONGO_URI"] = os.environ.get("MONGO_URI")
 app.secret_key = os.environ.get("SECRET_KEY")
 
+
 mongo = PyMongo(app)
+
 
 # functionality functions
 
@@ -29,6 +32,7 @@ def sort_movies(movie_list):
 
 
 # Template rendering
+
 @app.route("/")
 @app.route("/movies_list")
 def movies_list():
@@ -46,9 +50,11 @@ def search():
     for movie in movies:
         if movie["reviews"] == 0:
              mongo.db.movies.delete_one(movie)
+             
     movies = list(mongo.db.movies.find().sort({"_id": -1}))
     title = request.form.get("searchMovies")
     url_end = "&s=" + str(title).replace(" ", "_")
+
     try:
         title = request.form.get("searchMovies")
         url_end = "&s=" + str(title).lower().replace(" ", "_")
@@ -85,6 +91,7 @@ def register():
             "username": request.form.get("username").lower(),
             "password": generate_password_hash(request.form.get("password"))
         }
+
         mongo.db.users.insert_one(register)
 
         session["user"] = request.form.get("username").lower()
@@ -296,6 +303,7 @@ def dislike_review(imdbID, review_id):
 
 
 # https://www.geeksforgeeks.org/python-404-error-handling-in-flask/
+
 @app.errorhandler(404)
 def not_found(e): 
   return render_template("404.html") 
