@@ -14,6 +14,7 @@ The ArtMatch website has been tested manually as well as with automated services
   - [**Responsiveness Test**](#responsiveness-test)
   - [**Browser Compatibility**](#browser-compatibility)
   - [**Testing User Stories**](#testing-user-stories)
+  - [**Perofrmance**](#perofrmance)
     - [**User Profiles**](#user-profiles)
     - [**Movie Card**](#movie-card)
     - [**Header and Footer**](#header-and-footer)
@@ -157,19 +158,19 @@ The ArtMatch website has been tested manually as well as with automated services
         Result: Successfully identified the footer section, which displays credits acknowledging contributors and creators, demonstrating appreciation for their contributions.
 
 
-   
+- ## Perofrmance 
 
-|         |**Movie List**|**Movie Card**| **Profile Page**| **Profile Page**| **Add Movie** |
-|---------|-------------|----------------------|------------|------------|------------|
-|  Buttons |   Pass      |       Pass           |  Pass      |   Pass      |    Pass      |
-|  Links  |   Pass      |       Pass           |  Pass      |  Pass      |   Pass      |
-|  Images  |   Pass      |       Pass           |  Pass      |  Pass      |   Pass      |
-|  Nav Links | Pass  | Pass | Pass |  Pass      |   Pass      |
-|  CREATE review | Pass  | Pass | Pass |  Pass      |   Pass      |
-|  READ review | Pass  | Pass | Pass |  Pass      |   Pass      |
-|  UPDATE review | Pass  | Pass | Pass |  Pass      |   Pass      |
-|  DELETE review | Pass  | Pass | Pass |  Pass      |   Pass      |
-|  API calls | Pass  | Pass | Pass |  Pass      |   Pass      |
+    |         |**Movie List**|**Movie Card**| **Profile Page**| **Profile Page**| **Add Movie** |
+    |---------|-------------|----------------------|------------|------------|------------|
+    |  Buttons |   Pass      |       Pass           |  Pass      |   Pass      |    Pass      |
+    |  Links  |   Pass      |       Pass           |  Pass      |  Pass      |   Pass      |
+    |  Images  |   Pass      |       Pass           |  Pass      |  Pass      |   Pass      |
+    |  Nav Links | Pass  | Pass | Pass |  Pass      |   Pass      |
+    |  CREATE review | Pass  | Pass | Pass |  Pass      |   Pass      |
+    |  READ review | Pass  | Pass | Pass |  Pass      |   Pass      |
+    |  UPDATE review | Pass  | Pass | Pass |  Pass      |   Pass      |
+    |  DELETE review | Pass  | Pass | Pass |  Pass      |   Pass      |
+    |  API calls | Pass  | Pass | Pass |  Pass      |   Pass      |
 
 ## **Responsiveness Test**
 
