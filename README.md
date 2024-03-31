@@ -143,14 +143,92 @@ The CineCritic wesite is designed to be simple to navigate and easy to use. It i
     Can be found on the side of all pages of the website pages below the logo. Makes navigation through pages easy and intuitive.
     The navigation menu is fully responsive to accomodate users of all decvces. The active page is always highlighted. All other menu items are changing color when hovered over to increase usability.
 
-  - *Navigation Menu*
+    - *Navigation Menu*
 
-    ![Navigation Menu]()
+        ![Navigation Menu]()
+
+- ### **User Profiles**
+
+    Users can create a personalized profile on CineCritic by registering with a unique username and password. This feature enables users to access exclusive content, CRUD functionality for movie reviews and interact with the community. The login interface allows existing users to securely sign in to their accounts, while the registration form enables new users to create an account by providing necessary details.
+
+    - *login*
+
+        ![Login]()
+
+    - *Register*
+
+        ![Register]()
+    
+    - *Admin User*
+
+        An admin user has access to an exclusive admin profile where they can monitor all reviews made on the website. This includes the ability to view, edit, delete, and create reviews as necessary, providing comprehensive control over user-generated content.
+
+        - *Admin*
+
+            ![Admin]()
+    
+    - *Profile Page*
+
+        - *Personalized Profile Page*
+
+            Each user has their own personalized profile page where they can view a comprehensive list of all their reviews. This page serves as a centralized hub for users to manage and track their contributions to the platform.
+        
+        - *Review Details and Edit Mode*
+
+            Users have the ability to access additional details and enter edit mode for each review. By clicking on a specific review entry, users are redirected to the movie card page corresponding to their particular review. Here, they can view comprehensive information about the movie and make edits to their review if necessary.
+        
+        - *Profile Page*
+
+            ![Profile Page]()
+
+- ### **Movie Card**
+
+    The movie card page provides comprehensive details about a specific movie, including its title, plot synopsis, director, actors, release year, and other relevant information. Additionally, users can view a list of all reviews submitted for that particular movie. Furthermore, users can edit/delete their own reviews as weill as upvote or downvote reviews created by other users. Last but not least, a user can redirect themselves to IMDB page of the specific movie they are looking for in order to access more infomation about it.
+
+    - *Movie Card*
+
+        ![Movie Card]() 
+
+- ### **Header and Footer**
+
+    - *Header*
+
+        The header section of the website contains the name and slogan, providing users with a quick and clear identification of the website. This minimalistic design approach ensures that the header remains uncluttered and focused on conveying the core identity of the platform.
+    
+    - *Footer*
+
+        The footer section of the website displays credits, acknowledging the contributors and creators of the platform. This section serves as a gesture of appreciation towards those who have contributed to the development and maintenance of the website.
 
 
-[Back to top](<#contents>)
+- ### Reviewing A Movie**
 
-## **Future Features**
+    - **Movie Search and Database Integration**
+
+        Users can search for movies by title through an integrated communication with an external movie API - OMDB (Open Movie Database). Upon finding the desired movie, users can add it to the website's database along with essential details like plot synopsis, director, actors, poster image, and year of release. 
+
+        - *Search and Add Movie*
+
+            ![Search and Add Movie]()
+    
+    - **Review Functionality**
+
+        Once a movie is added to the database, users can review it. All users have the ability to review movies listed on the website. Users can share their opinions, ratings, and comments, contributing to the community's collective feedback on the movie. Movies with no reviews will automatically be removed from the database.
+
+        - *Review a Movie*
+
+            ![Review a Movie]()
+    
+    - **User Review Management**
+
+        Users have control over their own reviews. They can edit or delete their reviews as needed, allowing them to update their opinions or remove outdated content. Additionally, users can interact with reviews from other users by upvoting or downvoting them, expressing their agreement or disagreement with the provided feedback.
+
+        - Edit/Delete Review
+
+        - Upvote/Downvote Review
+
+        - *Review a Movie*
+
+            ![Review a Movie]()
 
 
 [Back to top](<#contents>)
