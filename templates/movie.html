@@ -65,7 +65,7 @@
 
                         </div>
                     </div>
-                    <div class="container container-brown rounded p-2 text-center mb-4">
+                    <div class="container container-brown rounded p-2 text-center mb-4 footer-margin">
                         <div class="row">
                             <div class="col">
                                 <h5 class="my-4">Reviews</h5>
@@ -128,7 +128,7 @@
                                                                 {% endif %}
                                                             {% endif %}
                                                             <p class="m-0"><small><i>Liked by: </i>{{ review.thumbs_up }}</small></p>
-                                                            <p ><small><i>Disiked by: </i>{{ review.thumds_down }}</small></p>
+                                                            <p ><small><i>Disliked by: </i>{{ review.thumds_down }}</small></p>
                                                         </div>
                                                     {% endif %}
                                                 {% endfor %}
@@ -145,7 +145,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col text-center footer-margin">
+                <div class="col text-center">
                     <a href="{{ url_for('search') }}" class="btn btn-large btn-brown">Back to Search</a>
                 </div>
             </div>
