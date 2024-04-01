@@ -23,9 +23,6 @@ CineCritic is a profile based movie review web application dedicated to movie en
 - [**Technologies Used**](#technologies-used)
 - [**Testing**](#testing)
 - [**Deployment**](#deployment)
-    - [**Project Deployment Instructions**](#project-deployment-instructions)
-    - [**Forking the Repository on GitHub**](#forking-the-repository-on-github)
-    - [**Creating a Local Clone of this Project**](#creating-a-local-clone-of-this-project)
 - [**Credits**](#credits)
 - [**Acknowledgements**](#acknowledgements)
 
@@ -306,29 +303,6 @@ This website is deployed on Heroku pages. Follow these steps to deploy a project
 
   You can access the live link to the GitHub deployed version - [https://cine-critic-0310d8ee3de7.herokuapp.com](https://cine-critic-0310d8ee3de7.herokuapp.com)
 
-
-### **Forking the Repository on GitHub**
-
-To create a duplicate of the GitHub Repository, known as forking, you can view and make changes to this copy without impacting the original repository. To fork the repository, follow these steps:
-
-1. Log in on **GitHub** and find the [repository](https://github.com/sergpapa/Art-match).
-2. On the right-hand side of your page, next to the repository name, you can find a **Fork** button. Click it to create a duplicate of the original repository in your GitHub account.
-
-![GitHub-forking](static/images/readme/github-fork.png)
-
-### **Creating a Local Clone of this Project**
-
-To clone this project from GitHub to your local environment, follow these steps:
-
-1. Below the repository's name, click on the **Code** tab.
-2. Under **Clone with HTTPS**, click on the clipboard icon to copy the URL.
-
-![Cloning](static/images/readme/github-clone.png)
-
-3. In your prefered IDE, open **Git Bash**.
-4. Change the current working directory to the location where you want to create the cloned directory.
-5. Type **git clone**, and then paste the copied URL from GitHub.
-6. Press **enter** to vcreate the local clone.
 
 [Back to top](<#contents>)
 
