@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
     <div class="col ml-2">
-        <div class="container-fluid .flex-wrap">
+        <div class="container-fluid .flex-wrap footer-margin">
             <div class="container-brown offset-1 offset-lg-0 text-center">
                 <div class="row">
                     <div class="col my-4">
@@ -15,7 +15,7 @@
                     </div>
                 </div>
                 {% for review in reviews %}
-                    <div class="row footer-margin">
+                    <div class="row">
                         <div class="col">
                             {% if review.added_by == session["user"] %}
                                 <div class="container">
