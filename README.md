@@ -301,9 +301,8 @@ This website is deployed on Heroku pages. Follow these steps to deploy a project
     - **Automatic Deployment:**
 
         - In the Heroku dashboard, go to the deploy tab and enable automatic deployments.
-        - Heroku will fetch the code from GitHub and deploy the app using the specified packages. Click "Open app" to access the live version.
-
-
+        - Heroku will fetch the code from GitHub and deploy the app using the specified packages. 
+        - Click "Open app" to access the live version.
 
   You can access the live link to the GitHub deployed version - [https://cine-critic-0310d8ee3de7.herokuapp.com](https://cine-critic-0310d8ee3de7.herokuapp.com)
 
