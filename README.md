@@ -248,7 +248,7 @@ The CineCritic wesite is designed to be simple to navigate and easy to use. It i
 - [OMDB](https://www.omdbapi.com) -  movie db extrenal API
 - [Wireframe.cc](https://wireframe.ccm) - wireframes
 - [GitHub](https://github.com) - hosting and storing
-- [Heroku](https://wireframe.cc) - deployment
+- [Heroku](dashboard.heroku.com) - deployment
 - [Gitpod](https://gitpod.io/) - coding workspace
 - [GIMP](https://www.gimp.org) - image editing
   
