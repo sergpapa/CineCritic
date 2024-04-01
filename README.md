@@ -264,16 +264,49 @@ Please follow this [link](./TESTING.md) to learn more about testing CineCritic.
 
 ### **Project Deployment Instructions**
 
-This website is deployed on GitHub pages. Follow these steps to deploy a project:
+This website is deployed on Heroku pages. Follow these steps to deploy a project:
 
-  1. In the GitHub repository, go on the **Settings** tab.
-  2. In the Settings menu, move to the **Pages** section on the left-hand side.
-  3. In **Source**, select the **main** branch and click **save**.
-  4. After selecting the master branch, the page will automatically reload, displaying a ribbon indicating the successful deployment.
+- **Local Setup**
 
-![GitHub-deployment](static/images/readme/github-deply.png)
+    - **Clone the Project:** Log in to GitHub, navigate to the repository, and click on the "Code" button. Select "Open with GitHub Desktop" and follow the instructions to clone the repository locally.
+    - **Install Requirements:** In your local workspace, open a terminal window and navigate to the project directory. Use the command pip3 install -r requirements.txt to install all necessary dependencies.
+    - **Set Up MongoDB:** Sign up or log in to your MongoDB account. Create a cluster and a database, then create four collections: categories, recipes, subscribers, and users. Populate these collections with the appropriate string values according to the project's Information architecture.
+    - **Create Environment Variables:**
+        - Create a .gitignore file in the project's root directory.
+        - Add env.py to the .gitignore.
+        - Create the env.py file and define the required environment variables using the os module.
+    - **Run the App:** In your terminal window, run the command python3 app.py to start the application locally.
 
-  You can access the live link to the GitHub deployed version - [https://sergpapa.github.io/FPC/](https://sergpapa.github.io/FPC/)
+- **Heroku Deployment:** 
+
+    - **Set Up Local Workspace for Heroku:**
+
+        - Generate requirements.txt by running pip3 freeze --local > requirements.txt.
+        - Create a Procfile specifying the entry point for Heroku using the command python app.py > Procfile.
+    
+    - **Set Up Heroku:**
+
+        - Create a Heroku account and a new app, selecting your preferred region.
+        - Choose the "GitHub" deployment method and connect your repository to Heroku.
+    
+    - **Configure Environment Variables:**
+
+        - In Heroku, navigate to the app's settings and find "Config Vars."
+        - Enter the variables from your env.py file: IP, PORT, SECRET_KEY, MONGO_URI, and MONGO_DBNAME.
+    
+    - **Push Files to Repository:**
+
+        - Add and commit requirements.txt and Procfile to your Git repository.
+    
+    - **Automatic Deployment:**
+
+        - In the Heroku dashboard, go to the deploy tab and enable automatic deployments.
+        - Heroku will fetch the code from GitHub and deploy the app using the specified packages. Click "Open app" to access the live version.
+
+
+
+  You can access the live link to the GitHub deployed version - [https://cine-critic-0310d8ee3de7.herokuapp.com](https://cine-critic-0310d8ee3de7.herokuapp.com)
+
 
 ### **Forking the Repository on GitHub**
 
