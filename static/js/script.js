@@ -1,5 +1,3 @@
-console.log("we in")
-
 const nav_links = document.getElementsByClassName("nav-link");
 
 $(document).ready(function() {
