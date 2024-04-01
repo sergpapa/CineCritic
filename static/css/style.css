@@ -219,7 +219,7 @@ footer {
     }
 
     .margin-sm {
-        margin-left: 1.5em;
+        margin-left: .5em;
     }
 }
 @media only screen and (max-width: 576px) {
